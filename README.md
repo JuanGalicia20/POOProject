@@ -1,3 +1,3 @@
 # POOProject
 Proyecto final de POO
-Que onda mucha, este va a ser el repositorio fijo del proyecto. Por favor miren unos tutoriales de como utilizarlo bien. Se pueden crear cambios en una nueva branch etc y luego ya se une y asi. 
+Proyecto final de curso Programacion Orientada a Objetos. Aplicacion para dispositivos Android utilizando Kotlin y Java. Aplicación sobre la vida estudiantil en tiempos de pandemia, y como se puede mejorar.
