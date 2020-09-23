@@ -4,18 +4,18 @@
 * @version 22/09/2020
 */
 
-import math.util.Random;
-import math.util.ArrayList;
+import java.util.Random;
+import java.util.ArrayList;
 
 public class Categoria{
 	//Atributos
 	private String nombreCategoria;
-	private ArrayList<Preguntas> listaPreguntas;
+	private ArrayList<Pregunta> listaPreguntas;
 	Random generador = new Random();
 	//Constructor
 	public Categoria(String name){
 		nombreCategoria = name;
-		listaPreguntas = new ArrayList<Peguntas>();
+		listaPreguntas = new ArrayList<Pegunta>();
 	}
 	//Métodos
 	public String getNombreCategoria(){
