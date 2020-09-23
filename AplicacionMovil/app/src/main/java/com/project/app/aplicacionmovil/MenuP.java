@@ -44,7 +44,7 @@ public class MenuP extends AppCompatActivity {
         btnConsejos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            openMenuPrincipal(4);
             }
         });
 
@@ -60,14 +60,21 @@ public class MenuP extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenuPrincipal();
+                openMenuPrincipal(1);
             }
         });
     }
 
-    public void openMenuPrincipal()
+    public void openMenuPrincipal(int opcion)
     {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        if(opcion == 1) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if(opcion == 4)
+        {
+            Intent intent = new Intent(this, consejos_manager.class);
+            startActivity(intent);
+        }
     }
 }
