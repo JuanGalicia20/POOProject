@@ -1,12 +1,10 @@
-package com.project.app.aplicacionmovil;
-
-/**
+/** 
 * KellyVirtual - Consejos
 * @author JoseDeLaVega
 * @version 22/09/2020
 */
 
-public class Consejos<Categoria> {
+/**public class Consejos{
 	//Atributos
 	private Categoria cat1;
 	private Categoria cat2;
@@ -15,7 +13,7 @@ public class Consejos<Categoria> {
 	private Categoria cat5;
 
 	//Constructor
-	public Consejos(Categoria cat1, Categoria cat2, Categoria cat3, Categoria cat4, Categoria cat5){
+	public Consejo(Categoria cat1, Categoria cat2, Categoria cat3, Categoria cat4, Categoria cat5){
 		this.cat1 = cat1;
 		this.cat2 = cat2;
 		this.cat3 = cat3;
@@ -56,4 +54,4 @@ public class Consejos<Categoria> {
 		cat5 = newCat;
 	}
 
-}
+}*/

@@ -1,23 +1,21 @@
-package com.project.app.aplicacionmovil; /**
+/**package com.project.app.aplicacionmovil;
 * KellyVirtual - Categoria
 * @author JoseDeLaVega
 * @version 22/09/2020
 */
-
-import com.project.app.aplicacionmovil.Pregunta;
-
-import java.util.Random;
-import java.util.ArrayList;
+/**
+import math.util.ArrayList;
+import math.util.Random;
 
 public class Categoria{
 	//Atributos
 	private String nombreCategoria;
-	private ArrayList<Pregunta> listaPreguntas;
+	private ArrayList<Preguntas> listaPreguntas;
 	Random generador = new Random();
 	//Constructor
 	public Categoria(String name){
 		nombreCategoria = name;
-		listaPreguntas = new ArrayList<Pregunta>();
+		listaPreguntas = new ArrayList<Peguntas>();
 	}
 	//Métodos
 	public String getNombreCategoria(){
@@ -42,4 +40,4 @@ public class Categoria{
 	}
 
 
-}
+}*/

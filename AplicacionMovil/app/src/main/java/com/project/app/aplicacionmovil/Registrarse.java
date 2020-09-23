@@ -1,5 +1,6 @@
 package com.project.app.aplicacionmovil;
 
+import java.util.HashMap;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -14,9 +15,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.prefs.Preferences;
 
+import kotlin.Suppress;
+
 public class Registrarse extends AppCompatActivity {
+    private static final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Button finRegistrarse;
     private EditText txtBoxUsuario;
@@ -48,8 +54,16 @@ public class Registrarse extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                HashMap<String, String> data = new HashMap<String, String>();
+                data.put("user", txtBoxUsuario.getText().toString());
+                data.put("email", txtBoxEmail.getText().toString());
+                data.put("password", txtBoxContra.getText().toString());
+                data.put("name", txtBoxNombre.getText().toString());
+                data.put("birthday", txtBoxCumple.getText().toString());
+                db.collection("Users").document(txtBoxUsuario.getText().toString()).set(data);
 
-                if (txtBoxUsuario.getText().toString().matches("") || txtBoxContra.getText().toString().matches("") || txtBoxNombre.getText().toString().matches("") ||
+
+               /** if (txtBoxUsuario.getText().toString().matches("") || txtBoxContra.getText().toString().matches("") || txtBoxNombre.getText().toString().matches("") ||
                         txtBoxEmail.getText().toString().matches("") || txtBoxCumple.getText().toString().matches("")) {
                     Toast.makeText(Registrarse.this, "Por favor llenar todos los campos", Toast.LENGTH_SHORT).show();
                     return;
@@ -82,7 +96,7 @@ public class Registrarse extends AppCompatActivity {
                         Toast.makeText(Registrarse.this, "Ocurrió un error", Toast.LENGTH_LONG).show();
                     }
 
-                }
+                }*/
             }
         });
     }
