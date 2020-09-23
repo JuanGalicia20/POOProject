@@ -17,8 +17,6 @@ public class MenuP extends AppCompatActivity {
     private ImageButton btnTareas;
     private ImageButton btnConsejos;
     private ImageButton btnPlanificacion;
-    private int contador=0;
-    private HashMap<Integer, String> consejos = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +28,7 @@ public class MenuP extends AppCompatActivity {
         btnHorarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Scanner leer = new Scanner(System.in);
-                System.out.println("Ingrese el nombre");
-                //String nom = leer.nextLine();
-                System.out.println("Ingrese el color");
-                //String color = leer.next();
-                Actividades act = new Actividades("Tarea para mañana","Rojo");
-                System.out.println(act.toString());
+
             }
         });
 
@@ -44,11 +36,7 @@ public class MenuP extends AppCompatActivity {
         btnTareas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Scanner leer = new Scanner(System.in);
-                System.out.println("Ingrese el dia");
-                //String dsem = leer.next();
-                Dia dia = new Dia("Lunes");
-                System.out.println(dia.toString());
+
             }
         });
 
@@ -56,10 +44,7 @@ public class MenuP extends AppCompatActivity {
         btnConsejos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                consejos.put(contador,"Levantate cada 20 minutos y mira a 20 metros por 20 segundos");
-                contador++;
-                Pregunta pr = new Pregunta("Salud",consejos);
-                System.out.println(pr.toString());
+            openMenuPrincipal(4);
             }
         });
 
@@ -67,18 +52,7 @@ public class MenuP extends AppCompatActivity {
         btnPlanificacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Scanner leer = new Scanner(System.in);
-                System.out.println("Ingrese el nombre del pendiente");
-                //String nombreP = leer.nextLine();
-                System.out.println("Ingrese el mes");
-                //int mes = leer.nextInt();
-                System.out.println("Ingrese el dia");
-                //int dia = leer.nextInt();
-                System.out.println("Ingrese la descripcion del pendiente");
-                //String descP = leer.nextLine();
-                Date date = new Date(120,9 ,2);
-                Pendientes pend1 = new Pendientes("Tarea de Calculo",date,"Ejercitacion #5 de Calculo1 sobre aplicaciones de la derivada");
-                System.out.println(pend1.toString());
+
             }
         });
 
@@ -86,14 +60,21 @@ public class MenuP extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenuPrincipal();
+                openMenuPrincipal(1);
             }
         });
     }
 
-    public void openMenuPrincipal()
+    public void openMenuPrincipal(int opcion)
     {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        if(opcion == 1) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if(opcion == 4)
+        {
+            Intent intent = new Intent(this, consejos_manager.class);
+            startActivity(intent);
+        }
     }
 }

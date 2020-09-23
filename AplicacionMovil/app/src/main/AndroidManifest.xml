@@ -9,8 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuP"></activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".consejos_manager"
+            android:label="@string/title_activity_consejos_manager"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MenuP" />
+        <activity android:name=".Registrarse" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
