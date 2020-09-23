@@ -1,5 +1,3 @@
-
-
 package com.project.app.aplicacionmovil;
 
 import java.util.ArrayList;
