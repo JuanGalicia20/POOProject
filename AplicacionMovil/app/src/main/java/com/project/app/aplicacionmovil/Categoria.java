@@ -1,8 +1,10 @@
-/** 
+package com.project.app.aplicacionmovil; /**
 * KellyVirtual - Categoria
 * @author JoseDeLaVega
 * @version 22/09/2020
 */
+
+import com.project.app.aplicacionmovil.Pregunta;
 
 import java.util.Random;
 import java.util.ArrayList;
