@@ -39,10 +39,10 @@
         android:layout_marginTop="20dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Confirmar Contraseña"
+        android:hint="@string/contrasena"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxConfirm" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBoxUsuario" />
 
     <EditText
         android:id="@+id/txtBoxConfirm"
@@ -52,10 +52,10 @@
         android:layout_marginTop="20dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/contrasena"
+        android:hint="Confirmar Contraseña"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBoxContra" />
 
     <TextView
         android:id="@+id/textView13"
@@ -93,7 +93,7 @@
         android:hint="@string/nombre2"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBoxContra" />
+        app:layout_constraintTop_toBottomOf="@+id/txtBoxConfirm" />
 
     <EditText
         android:id="@+id/txtBoxEmail"
