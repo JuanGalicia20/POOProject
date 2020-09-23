@@ -15,7 +15,7 @@ public class Categoria{
 	//Constructor
 	public Categoria(String name){
 		nombreCategoria = name;
-		listaPreguntas = new ArrayList<Pegunta>();
+		listaPreguntas = new ArrayList<Pregunta>();
 	}
 	//Métodos
 	public String getNombreCategoria(){
