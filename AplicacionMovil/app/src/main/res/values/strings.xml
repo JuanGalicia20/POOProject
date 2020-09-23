@@ -15,17 +15,4 @@
     <string name="imagen1">imagen1</string>
     <string name="options">options</string>
     <string name="todo">TODO</string>
-    <string name="register">Register</string>
-    <string name="cumpleanos">Cumpleaños:</string>
-    <string name="correo">Correo:</string>
-    <string name="contrasena">Contraseña:</string>
-    <string name="nombre">Nombre:</string>
-    <string name="usuariotxt">Usuario:</string>
-    <string name="registrarse">Registrarse</string>
-    <string name="ingrese_los_siguientes_campos">Ingrese los siguientes campos</string>
-    <string name="cumplea_os">Cumpleaños</string>
-    <string name="contrasena2">Contraseña</string>
-    <string name="nombre2">Nombre</string>
-    <string name="email">E-mail</string>
-    <string name="usuario2">Usuario</string>
 </resources>
