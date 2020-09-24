@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Pregunta {
-    private String name;
-    private Map consejo;
+    private String nombre;
+    private Map consejos;
 
     public Map getConsejo() {
-        return consejo;
+        return consejos;
     }
 
     public String getName() {
-        return name;
+        return nombre;
     }
 
-    public Pregunta(String name, Map consejo) {
-        this.name = name;
-        this.consejo = consejo;
+    public Pregunta(String nombre, Map consejos) {
+        this.nombre= nombre;
+        this.consejos = consejos;
     }
 
     public Pregunta(){
@@ -28,8 +28,8 @@ public class Pregunta {
     @Override
     public String toString() {
         return "Pregunta{" +
-                "name='" + name + '\'' +
-                ", consejo='" + consejo + '\'' +
+                "name='" + nnombre + '\'' +
+                ", consejos='" + consejos + '\'' +
                 '}';
     }
 }
