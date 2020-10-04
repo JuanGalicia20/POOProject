@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity_consejos_respuestas"></activity>
         <activity
             android:name=".consejos_manager"
             android:label="@string/title_activity_consejos_manager"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MenuP" />
         <activity android:name=".Registrarse" />
         <activity

@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             userProv[1] = (String) documentSnapshot.get("name");
                             passProv[0] = (String) documentSnapshot.get("password");
 
+
                             if(usuario.equals(userProv[0]) && contrasena.equals(passProv[0])){
                                 openActividad(1);
                             }

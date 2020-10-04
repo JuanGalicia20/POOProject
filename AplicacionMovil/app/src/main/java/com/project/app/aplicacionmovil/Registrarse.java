@@ -30,6 +30,7 @@ public class Registrarse extends AppCompatActivity {
     private EditText txtBoxNombre;
     private EditText txtBoxEmail;
     private EditText txtBoxCumple;
+    private EditText txtBoxConfirm;
     private static String Kusuario = "";
     private static String Kcontra="";
     private static String Knombre="";
@@ -48,19 +49,32 @@ public class Registrarse extends AppCompatActivity {
         txtBoxNombre = (EditText) findViewById(R.id.txtBoxNombre);
         txtBoxEmail = (EditText) findViewById(R.id.txtBoxEmail);
         txtBoxCumple = (EditText) findViewById(R.id.txtBoxCumple);
+        txtBoxConfirm = (EditText) findViewById(R.id.txtBoxConfirm);
 
 
         finRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                HashMap<String, String> data = new HashMap<String, String>();
-                data.put("user", txtBoxUsuario.getText().toString());
-                data.put("email", txtBoxEmail.getText().toString());
-                data.put("password", txtBoxContra.getText().toString());
-                data.put("name", txtBoxNombre.getText().toString());
-                data.put("birthday", txtBoxCumple.getText().toString());
-                db.collection("Users").document(txtBoxUsuario.getText().toString()).set(data);
+                String contra = txtBoxContra.getText().toString();
+                String confirm = txtBoxConfirm.getText().toString();
+
+                if(contra.equals(confirm)){
+                    HashMap<String, String> data = new HashMap<String, String>();
+                    data.put("user", txtBoxUsuario.getText().toString());
+                    data.put("email", txtBoxEmail.getText().toString());
+                    data.put("password", txtBoxContra.getText().toString());
+                    data.put("name", txtBoxNombre.getText().toString());
+                    data.put("birthday", txtBoxCumple.getText().toString());
+                    db.collection("Users").document(txtBoxUsuario.getText().toString()).set(data);
+                    openMenuPrincipal();
+                    Toast.makeText(getApplicationContext(), "Registrado Correctamente", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Contraseña incorrecta, intente de nuevo", Toast.LENGTH_LONG).show();
+                }
+
+
 
 
                /** if (txtBoxUsuario.getText().toString().matches("") || txtBoxContra.getText().toString().matches("") || txtBoxNombre.getText().toString().matches("") ||
