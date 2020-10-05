@@ -15,6 +15,14 @@ public class Horarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horarios);
+
+       anadir = (CardView) findViewById(R.id.anadir);
+        this.anadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHorarioSeleccionado();
+            }
+        });
     }
 
 
