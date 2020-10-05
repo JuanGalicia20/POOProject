@@ -21,12 +21,13 @@
 
             <TextView
                 android:id="@+id/textGrid"
-                android:text="Consejos"
-                android:textSize="34sp"
-                android:textColor="@android:color/white"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/amaranth"
+                android:text="Consejos"
+                android:textColor="@android:color/white"
+                android:textSize="34sp"/>
 
         </RelativeLayout>
 
@@ -45,11 +46,15 @@
             <!-- Row 1 -->
 
             <!-- Column 1 -->
+
+            <!-- Column 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/Estudiar"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_row="0"
                 android:layout_rowWeight="1"
+                android:layout_column="0"
                 android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -83,7 +88,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Column 2 -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"

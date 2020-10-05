@@ -25,12 +25,7 @@ public class consejos_manager extends AppCompatActivity {
         est.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openConsejos();
-
-
-
-
             }
         });
 

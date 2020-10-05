@@ -28,7 +28,7 @@ public class MenuP extends AppCompatActivity {
         btnHorarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            openMenuPrincipal(2);
             }
         });
 
@@ -71,6 +71,12 @@ public class MenuP extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+        else if(opcion == 2)
+        {
+            Intent intent = new Intent(this,Horarios.class);
+            startActivity(intent);
+        }
+
         else if(opcion == 4)
         {
             Intent intent = new Intent(this, consejos_manager.class);

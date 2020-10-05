@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity_consejos_respuestas"></activity>
+        <activity
+            android:name=".HorarioSeleccionado"
+            android:label="@string/title_activity_horario_seleccionado"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Horarios" />
+        <activity android:name=".activity_consejos_respuestas" />
         <activity
             android:name=".consejos_manager"
             android:label="@string/title_activity_consejos_manager"

@@ -120,4 +120,5 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="textview">TextView</string>
+    <string name="title_activity_horario_seleccionado">ScrollingActivity</string>
 </resources>

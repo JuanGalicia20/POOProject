@@ -28,7 +28,7 @@ public class Pregunta {
     @Override
     public String toString() {
         return "Pregunta{" +
-                "name='" + nnombre + '\'' +
+                "name='" + nombre + '\'' +
                 ", consejos='" + consejos + '\'' +
                 '}';
     }
