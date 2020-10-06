@@ -14,12 +14,11 @@ public class Periodo {
         return actividad;
     }
 
-    public String getHora() {
+    public int getHora() {
         return hora;
     }
 
     
-
     @Override
     public String toString() {
         return "Periodo{" +
