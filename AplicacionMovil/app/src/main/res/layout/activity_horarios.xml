@@ -19,7 +19,7 @@
             android:layout_height="0dp">
 
             <TextView
-                android:id="@+id/textGrid"
+                android:id="@+id/txtTitulo"
                 android:text="Horarios"
                 android:fontFamily="@font/amaranth"
                 android:textSize="34sp"
