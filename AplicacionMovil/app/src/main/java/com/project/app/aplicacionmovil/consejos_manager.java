@@ -25,7 +25,7 @@ public class consejos_manager extends AppCompatActivity {
         est.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openConsejos();
+                openConsejos("Estudiar");
             }
         });
 
@@ -40,8 +40,9 @@ public class consejos_manager extends AppCompatActivity {
 
     }
 
-    public void openConsejos() {
+    public void openConsejos(String type) {
         Intent intent = new Intent(this, activity_consejos_respuestas.class);
+        intent.putExtra("tipo", type);
         startActivity(intent);
     }
 }
