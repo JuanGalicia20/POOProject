@@ -12,7 +12,7 @@
         android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#A953F3"
+        android:background="#359db8"
         android:text="@string/registrarse"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
