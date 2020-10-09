@@ -10,7 +10,7 @@ public class Periodo {
         this.hora = hora;
     }
 
-    public String getActividad() {
+    public Actividades getActividad() {
         return actividad;
     }
 
