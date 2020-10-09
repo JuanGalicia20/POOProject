@@ -89,38 +89,38 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/Online"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
+                android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                app:cardElevation="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                >
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/catconsejos2"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/catconsejos2" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Clases en Linea"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -131,38 +131,38 @@
 
             <!-- Column 1 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/Apuntes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
+                android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                app:cardElevation="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                >
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/catconsejo3"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/catconsejo3" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Apuntes"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -170,38 +170,38 @@
 
             <!-- Column 2 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/Examenes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
+                android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                app:cardElevation="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                >
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/catconsejo4"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/catconsejo4" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Examenes"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -212,38 +212,38 @@
 
             <!-- Column 1 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/Tareas"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
+                android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                app:cardElevation="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                >
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/catconsejo5"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/catconsejo5" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Tareas"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -251,38 +251,38 @@
 
             <!-- Column 2 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/Team"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:layout_marginBottom="16dp"
+                android:layout_columnWeight="1"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                app:cardElevation="8dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                >
+                app:cardElevation="8dp">
 
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:src="@drawable/catconsejo6"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/catconsejo6" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Trabajos en equipo"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 

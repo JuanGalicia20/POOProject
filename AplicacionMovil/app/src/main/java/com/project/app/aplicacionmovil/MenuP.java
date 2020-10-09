@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class MenuP extends AppCompatActivity {
+    private String user;
     private ImageButton button;
     private ImageButton btnHorarios;
     private ImageButton btnTareas;
@@ -22,13 +23,18 @@ public class MenuP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+        /**
+         * Cambiar para objeto tipo user
+         */
+        Intent intent = getIntent();
+        this.user = intent.getStringExtra("User");
 
         btnHorarios = (ImageButton)findViewById(R.id.btnhorarios);
         btnHorarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            openMenuPrincipal(2);
+            openMenuPrincipal(2, user);
+
             }
         });
 
@@ -44,7 +50,7 @@ public class MenuP extends AppCompatActivity {
         btnConsejos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            openMenuPrincipal(4);
+            openMenuPrincipal(4, user );
             }
         });
 
@@ -60,12 +66,12 @@ public class MenuP extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenuPrincipal(1);
+                openMenuPrincipal(1, user);
             }
         });
     }
 
-    public void openMenuPrincipal(int opcion)
+    public void openMenuPrincipal(int opcion, String user)
     {
         if(opcion == 1) {
             Intent intent = new Intent(this, MainActivity.class);
@@ -74,6 +80,7 @@ public class MenuP extends AppCompatActivity {
         else if(opcion == 2)
         {
             Intent intent = new Intent(this,Horarios.class);
+            intent.putExtra("User", user);
             startActivity(intent);
         }
 

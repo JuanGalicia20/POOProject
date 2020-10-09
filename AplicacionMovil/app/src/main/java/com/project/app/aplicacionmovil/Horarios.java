@@ -1,5 +1,6 @@
 package com.project.app.aplicacionmovil;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.icu.text.SymbolTable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +24,21 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class Horarios extends AppCompatActivity {
+    private static final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ArrayList<String> names = new ArrayList<String>();
+    private String user;
     private CardView anadir;
     private Button newButton;
     private CardView formulario;
@@ -32,11 +47,19 @@ public class Horarios extends AppCompatActivity {
     private RadioGroup opcion;
     private RadioButton seleccionado;
     private EditText nombreHorario;
+    private int intRadioID = 2131362098;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horarios);
+        Intent intent = getIntent();
+        this.user = intent.getStringExtra("User");
+        createHorario();
+
+        /**
+         * Cambiar para objeto tipo user
+         */
 
         nombreHorario = (EditText)findViewById(R.id.txtViewNHorario);
         opcion = (RadioGroup) findViewById(R.id.radioGroup);
@@ -74,14 +97,58 @@ public class Horarios extends AppCompatActivity {
 
     public void addHorario()
     {
+       final FirebaseFirestore db = FirebaseFirestore.getInstance();
+       String nombre = nombreHorario.getText().toString();
+
+       String radioSelected;
+       if(intRadioID == 2131362098){
+           radioSelected = "Weekend";
+       }
+       else{
+           radioSelected = "Week";
+       }
+
+        HashMap<String, String> data = new HashMap<String, String>();
+        data.put("name", nombreHorario.getText().toString() );
+        data.put("length", radioSelected);
+        db.collection("Users").document(user).collection("Horarios").document(nombre).set(data);
+
+        if(intRadioID == 2131362098){
+            HashMap<String, String> data2 = new HashMap<String, String>();
+            data.put("0:00-0:00", "Main" );
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Lunes").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Martes").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Miercoles").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Jueves").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Viernes").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Sabado").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Domingo").document("Hora0").set(data2);
+
+        }
+        else{
+            HashMap<String, String> data2 = new HashMap<String, String>();
+            data.put("0:00-0:00", "Main" );
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Lunes").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Martes").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Miercoles").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Jueves").document("Hora0").set(data2);
+            db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Viernes").document("Hora0").set(data2);
+        }
+
+
         LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
         newButton = new Button(this);
-        String nombre = nombreHorario.getText().toString();
+
         newButton.setTag(nombreHorario.getText().toString());
         newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
         newButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         newButton.setBackgroundResource(R.drawable.horarioback);
         newButton.setTextSize(20);
+
+
+
+
+
         /*
         <Button
                 android:id="@+id/button1"
@@ -100,13 +167,52 @@ public class Horarios extends AppCompatActivity {
         newButton.setText(nombreHorario.getText().toString());
         layout.addView(newButton);
         Toast.makeText(this,"Nuevo horario Creado exitosamente",Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(getIntent());
     }
+    public void createHorario(){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
 
+        final ArrayList<String> names = new ArrayList<String>();
+
+        CollectionReference ConsejosReference = db.collection("Users").document(user).collection("Horarios");
+        ConsejosReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                        names.add((String)(doc.getId()));
+
+                    }
+                    for (int i = 0; i < names.size(); i++){
+                        newButton = new Button(getApplicationContext());
+                        newButton.setTag(names.get(i));
+                        newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
+                        newButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                        newButton.setBackgroundResource(R.drawable.horarioback);
+                        newButton.setTextSize(20);
+                        newButton.setText(names.get(i));
+                        layout.addView(newButton);
+
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Failed, try again ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+    }
     public void checkButton(View v)
     {
         int radioId = opcion.getCheckedRadioButtonId();
+        intRadioID = radioId;
         seleccionado = (RadioButton)findViewById(radioId);
-        Toast.makeText(this,"Selected: "+seleccionado.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Selected: "+seleccionado.getText() + radioId,Toast.LENGTH_SHORT).show();
     }
 
     public void openHorarioSeleccionado(String id) {

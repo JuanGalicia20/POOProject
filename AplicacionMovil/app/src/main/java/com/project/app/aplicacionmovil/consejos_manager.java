@@ -29,6 +29,46 @@ public class consejos_manager extends AppCompatActivity {
             }
         });
 
+        final CardView onl = (CardView) findViewById(R.id.Online);
+        onl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConsejos("Online");
+            }
+        });
+
+        final CardView apun = (CardView) findViewById(R.id.Apuntes);
+        apun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConsejos("Apuntes");
+            }
+        });
+
+        final CardView exam = (CardView) findViewById(R.id.Examenes);
+        exam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConsejos("Examenes");
+            }
+        });
+
+        final CardView tareas = (CardView) findViewById(R.id.Tareas);
+        tareas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConsejos("Tareas");
+            }
+        });
+
+        final CardView team = (CardView) findViewById(R.id.Team);
+        team.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openConsejos("Team");
+            }
+        });
+
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
