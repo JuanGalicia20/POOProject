@@ -13,23 +13,125 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_weight="2"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/nuevohorario"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="15dp"
+            tools:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:rotation="-90"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="40dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitCenter"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/flechaapuntaaladerecha" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/amaranth"
+                    android:text="Nuevo Horario"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/amaranth"
+                    android:text="Ingrese el nombre de su nuevo horario:"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/txtViewNHorario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="25dp"
+                    android:ems="10"
+                    android:hint="Nombre del horario"
+                    android:inputType="textPersonName" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonCompleta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#50C7AC"
+                        android:checked="true"
+                        android:onClick="checkButton"
+                        android:text="Semana Completa" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonLV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#50C7AC"
+                        android:layout_marginLeft="20dp"
+                        android:onClick="checkButton"
+                        android:text="Lunes a viernes" />
+                </RadioGroup>
+
+                <ImageButton
+                    android:id="@+id/imageButtonCrearHorario"
+                    android:layout_width="320dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/bthorario" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
 
             <TextView
                 android:id="@+id/textGrid"
-                android:text="Horarios"
-                android:fontFamily="@font/amaranth"
-                android:textSize="34sp"
-                android:textColor="@android:color/white"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/amaranth"
+                android:text="Horarios"
+                android:textColor="@android:color/white"
+                android:textSize="34sp" />
+
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/rootlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -37,16 +139,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/anadir"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:clickable="false"
+                android:clickable="true"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
-                app:cardUseCompatPadding="false">
+                app:cardUseCompatPadding="false"
+                android:focusable="true">
 
 
                 <LinearLayout
@@ -78,6 +180,7 @@
                         android:textSize="34dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
 
 
