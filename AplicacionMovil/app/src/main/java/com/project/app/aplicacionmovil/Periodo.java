@@ -56,6 +56,8 @@ public class Periodo {
         this.minFinal = minFinal;
     }
 
+    
+
 
     
     @Override
