@@ -1,5 +1,8 @@
 package com.project.app.aplicacionmovil;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class HorarioDiario extends Horario {
 
@@ -25,11 +28,19 @@ public class HorarioDiario extends Horario {
     }
 
     public void addPeriodo(Periodo newPeriodo){
-        listaPeriodo.add(newPeriodo);
+        listaPeriodos.add(newPeriodo);
     }
 
     public String toString() {
-        return "Horario de " + nombreHorario + "{" +
-                "Mis periodos='" + listaPeriodos + '\'' +'}';
+        String showPeriodo = "";
+        Iterator<Periodo> periodo = listaPeriodos.iterator();
+        while (post.hasNext()){
+            Periodo elemento = periodo.next();
+            showPeriodo = " Horario de " + nombreHorario + "{" + "Mis periodos = " + listaPeriodos + "\n " + "}";
+        }
+        return showPeriodo;
     }
+
+   
+
 }
