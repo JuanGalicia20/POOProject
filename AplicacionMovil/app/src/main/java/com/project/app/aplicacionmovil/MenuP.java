@@ -58,9 +58,10 @@ public class MenuP extends AppCompatActivity {
         btnPlanificacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                openMenuPrincipal(5,user);
             }
         });
+
 
         button = (ImageButton) findViewById(R.id.options);
         button.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +88,12 @@ public class MenuP extends AppCompatActivity {
         else if(opcion == 4)
         {
             Intent intent = new Intent(this, consejos_manager.class);
+            startActivity(intent);
+        }
+
+        else if(opcion == 5)
+        {
+            Intent intent = new Intent(this, Planificacion.class);
             startActivity(intent);
         }
     }

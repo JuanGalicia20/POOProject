@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ public class activity_consejos_respuestas extends AppCompatActivity {
         this.type = intent.getStringExtra("tipo");
 
         setContentView(R.layout.activity_consejos_respuestas);
+        final ImageView imagen = (ImageView)findViewById(R.id.imagenP);
         final TextView titulo = (TextView)findViewById(R.id.txtTitulo);
         final TextView pregunta1 = (TextView)findViewById(R.id.txtPregunta1);
         final TextView r1 = (TextView)findViewById(R.id.txtRespuesta1);
@@ -52,31 +55,37 @@ public class activity_consejos_respuestas extends AppCompatActivity {
             type1 = "Study";
             getType(pregunta1, r1, pregunta2, r2, pregunta3, r3, type1);
             titulo.setText(type);
+            imagen.setImageResource(R.drawable.catconsejos1);
         }
         else if (type.equals("Online")){
             type1 = "Clases en linea";
             getType(pregunta1, r1, pregunta2, r2, pregunta3, r3, type);
             titulo.setText(type1);
+            imagen.setImageResource(R.drawable.catconsejos2);
         }
         else if (type.equals("Apuntes")){
             type1 = "Notes";
             getType(pregunta1, r1, pregunta2, r2, pregunta3, r3, type1);
             titulo.setText(type);
+            imagen.setImageResource(R.drawable.catconsejo3);
         }
         else if (type.equals("Examenes")){
             type1 = "Exams";
             getType(pregunta1, r1, pregunta2, r2, pregunta3, r3, type1);
             titulo.setText(type);
+            imagen.setImageResource(R.drawable.catconsejo4);
         }
         else if (type.equals("Tareas")){
             type1 = "Homework";
             getType(pregunta1, r1, pregunta2, r2, pregunta3, r3, type1);
             titulo.setText(type);
+            imagen.setImageResource(R.drawable.catconsejo5);
         }
         else if (type.equals("Team")){
             type1 = "Trabajo en Equipo";
             getType(pregunta1, r1, pregunta2, r2, pregunta3, r3, type);
             titulo.setText(type1);
+            imagen.setImageResource(R.drawable.catconsejo6);
         }
         else {
             Toast.makeText(getApplicationContext(), "Failed, try again ", Toast.LENGTH_SHORT).show();
