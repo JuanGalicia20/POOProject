@@ -17,6 +17,10 @@ public class Actividades {
         this.color = color;
     }
 
+    public Actividades(){
+
+    }
+
     @Override
     public String toString() {
         return "Actividades{" +

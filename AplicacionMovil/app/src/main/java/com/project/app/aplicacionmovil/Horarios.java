@@ -4,12 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.icu.text.SymbolTable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +31,8 @@ import java.util.HashMap;
 
 
 public class Horarios extends AppCompatActivity {
+    private ArrayList<Horario_class> horarios = new ArrayList<>();
+
     private static final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<String> names = new ArrayList<String>();
     private String user;
@@ -62,6 +59,8 @@ public class Horarios extends AppCompatActivity {
         /**
          * Cambiar para objeto tipo user
          */
+
+
 
         nombreHorario = (EditText)findViewById(R.id.txtViewNHorario);
         opcion = (RadioGroup) findViewById(R.id.radioGroup);
@@ -99,18 +98,19 @@ public class Horarios extends AppCompatActivity {
 
     public void addHorario()
     {
+        ArrayList<Horario_dia> dias_horario = new ArrayList<>();
         contador+=1;
-       final FirebaseFirestore db = FirebaseFirestore.getInstance();
-       String nombre = nombreHorario.getText().toString();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String nombre = nombreHorario.getText().toString();
 
-       String radioSelected;
-       if(intRadioID == 2131362098){
-           radioSelected = "Weekend";
-       }
-       else{
-           radioSelected = "Week";
-       }
-
+           String radioSelected;
+        if(intRadioID == 2131362098){
+            radioSelected = "Weekend";
+        }
+        else{
+            radioSelected = "Week";
+        }
+        // Key : value
         HashMap<String, String> data = new HashMap<String, String>();
         data.put("name", nombreHorario.getText().toString() );
         data.put("length", radioSelected);
@@ -119,6 +119,14 @@ public class Horarios extends AppCompatActivity {
         if(intRadioID == 2131362098){
             HashMap<String, String> data2 = new HashMap<String, String>();
             data.put("0:00-0:00", "Main" );
+            Horario_dia Lunes = new Horario_dia("Lunes");
+            Horario_dia Martes = new Horario_dia("Martes");
+            Horario_dia Miercoles = new Horario_dia("Miercoles");
+            Horario_dia Jueves = new Horario_dia("Jueves");
+            Horario_dia Viernes = new Horario_dia("Viernes");
+            Horario_dia Sabado = new Horario_dia("Sabado");
+            Horario_dia Domingo = new Horario_dia("Domingo");
+
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Lunes").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Martes").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Miercoles").document("Hora0").set(data2);
@@ -127,17 +135,42 @@ public class Horarios extends AppCompatActivity {
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Sabado").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Domingo").document("Hora0").set(data2);
 
+            dias_horario.add(Lunes);
+            dias_horario.add(Martes);
+            dias_horario.add(Miercoles);
+            dias_horario.add(Jueves);
+            dias_horario.add(Viernes);
+            dias_horario.add(Sabado);
+            dias_horario.add(Domingo);
+
         }
         else{
             HashMap<String, String> data2 = new HashMap<String, String>();
             data.put("0:00-0:00", "Main" );
+            Horario_dia Lunes = new Horario_dia("Lunes");
+            Horario_dia Martes = new Horario_dia("Martes");
+            Horario_dia Miercoles = new Horario_dia("Miercoles");
+            Horario_dia Jueves = new Horario_dia("Jueves");
+            Horario_dia Viernes = new Horario_dia("Viernes");
+
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Lunes").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Martes").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Miercoles").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Jueves").document("Hora0").set(data2);
             db.collection("Users").document(user).collection("Horarios").document(nombre).collection("Viernes").document("Hora0").set(data2);
-        }
 
+            dias_horario.add(Lunes);
+            dias_horario.add(Martes);
+            dias_horario.add(Miercoles);
+            dias_horario.add(Jueves);
+            dias_horario.add(Viernes);
+
+        }
+        System.out.println(dias_horario.get(0).getName());
+        System.out.println(nombre);
+        System.out.println(radioSelected);
+        Horario_class hor = new Horario_class(dias_horario, nombre, radioSelected);
+        this.horarios.add(hor);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
         newButton = new Button(this);
@@ -148,6 +181,7 @@ public class Horarios extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "noooooooo", Toast.LENGTH_SHORT).show();
             }
         });
+
         newButton.setId(contador);
         newButton.setTag(nombreHorario.getText().toString());
         newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
@@ -171,7 +205,7 @@ public class Horarios extends AppCompatActivity {
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="25dp" />
          */
-        newButton.setText(nombreHorario.getText().toString());
+        newButton.setText(nombre);
         layout.addView(newButton);
         Toast.makeText(this,"Nuevo horario Creado exitosamente",Toast.LENGTH_SHORT).show();
         finish();
@@ -190,6 +224,7 @@ public class Horarios extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(DocumentSnapshot doc : task.getResult().getDocuments()){
+
                         names.add((String)(doc.getId()));
 
                     }

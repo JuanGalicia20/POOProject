@@ -96,9 +96,10 @@ public class activity_consejos_respuestas extends AppCompatActivity {
 
     private void getType(final TextView txt1, final TextView txtR1, final TextView txt2, final TextView txtR2, final TextView txt3, final TextView txtR3, String type){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-       final ArrayList<String> preguntas = new ArrayList<String>();
+        final ArrayList<String> preguntas = new ArrayList<String>();
         final ArrayList<String> respuestas = new ArrayList<String>();
         CollectionReference ConsejosReference = db.collection("Consejos").document(type).collection("preguntas");
+
         ConsejosReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
