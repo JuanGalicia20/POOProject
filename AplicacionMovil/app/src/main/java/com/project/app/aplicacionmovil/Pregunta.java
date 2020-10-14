@@ -1,23 +1,23 @@
 package com.project.app.aplicacionmovil;
 
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 public class Pregunta {
     private String nombre;
-    private Map consejos;
+    private ArrayList<String> respuestas;
 
-    public Map getConsejo() {
-        return consejos;
+    public ArrayList<String> getRespuestas() {
+        return respuestas;
     }
 
     public String getName() {
         return nombre;
     }
 
-    public Pregunta(String nombre, Map consejos) {
+    public Pregunta(String nombre, ArrayList<String> respuestas) {
         this.nombre= nombre;
-        this.consejos = consejos;
+        this.respuestas = respuestas;
     }
 
     public Pregunta(){
@@ -29,7 +29,7 @@ public class Pregunta {
     public String toString() {
         return "Pregunta{" +
                 "name='" + nombre + '\'' +
-                ", consejos='" + consejos + '\'' +
+                ", respuesta='" + respuestas.get(0) + '\'' + respuestas.get(1)+
                 '}';
     }
 }
