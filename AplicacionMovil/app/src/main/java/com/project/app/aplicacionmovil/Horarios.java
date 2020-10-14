@@ -48,6 +48,8 @@ public class Horarios extends AppCompatActivity {
     private RadioButton seleccionado;
     private EditText nombreHorario;
     private int intRadioID = 2131362098;
+    private int contador=-1;
+    private Button bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class Horarios extends AppCompatActivity {
 
     public void addHorario()
     {
+        contador+=1;
        final FirebaseFirestore db = FirebaseFirestore.getInstance();
        String nombre = nombreHorario.getText().toString();
 
@@ -139,14 +142,18 @@ public class Horarios extends AppCompatActivity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
         newButton = new Button(this);
 
+        newButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "noooooooo", Toast.LENGTH_SHORT).show();
+            }
+        });
+        newButton.setId(contador);
         newButton.setTag(nombreHorario.getText().toString());
         newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
         newButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         newButton.setBackgroundResource(R.drawable.horarioback);
         newButton.setTextSize(20);
-
-
-
 
 
         /*
@@ -170,6 +177,7 @@ public class Horarios extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
+
     public void createHorario(){
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         final LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
@@ -193,6 +201,12 @@ public class Horarios extends AppCompatActivity {
                         newButton.setBackgroundResource(R.drawable.horarioback);
                         newButton.setTextSize(20);
                         newButton.setText(names.get(i));
+                        newButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                openHorarioSeleccionado();
+                            }
+                        });
                         layout.addView(newButton);
 
                     }
@@ -202,11 +216,9 @@ public class Horarios extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
+
+
     public void checkButton(View v)
     {
         int radioId = opcion.getCheckedRadioButtonId();
@@ -215,7 +227,7 @@ public class Horarios extends AppCompatActivity {
         Toast.makeText(this,"Selected: "+seleccionado.getText() + radioId,Toast.LENGTH_SHORT).show();
     }
 
-    public void openHorarioSeleccionado(String id) {
+    public void openHorarioSeleccionado() {
         Intent intent = new Intent(this, HorarioSeleccionado.class);
         startActivity(intent);
     }
