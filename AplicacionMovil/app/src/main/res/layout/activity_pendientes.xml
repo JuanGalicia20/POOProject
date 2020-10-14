@@ -40,7 +40,6 @@
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="208dp"
-                android:layout_height="74dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:fontFamily="@font/amaranth"

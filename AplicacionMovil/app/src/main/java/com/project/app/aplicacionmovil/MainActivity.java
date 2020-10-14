@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MenuP.class);
             intent.putExtra("User", txtUsuario.getText().toString());
             startActivity(intent);
+            finish();
 
         }
         else if(opcion==2)

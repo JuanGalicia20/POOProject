@@ -201,10 +201,11 @@ public class Horarios extends AppCompatActivity {
                         newButton.setBackgroundResource(R.drawable.horarioback);
                         newButton.setTextSize(20);
                         newButton.setText(names.get(i));
+                        final int finalI = i;
                         newButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                openHorarioSeleccionado();
+                                openHorarioSeleccionado(names.get(finalI));
                             }
                         });
                         layout.addView(newButton);
@@ -227,8 +228,10 @@ public class Horarios extends AppCompatActivity {
         Toast.makeText(this,"Selected: "+seleccionado.getText() + radioId,Toast.LENGTH_SHORT).show();
     }
 
-    public void openHorarioSeleccionado() {
+    public void openHorarioSeleccionado(String nombreH) {
         Intent intent = new Intent(this, HorarioSeleccionado.class);
+        intent.putExtra("User" ,user);
+        intent.putExtra("Horario",nombreH);
         startActivity(intent);
     }
 
