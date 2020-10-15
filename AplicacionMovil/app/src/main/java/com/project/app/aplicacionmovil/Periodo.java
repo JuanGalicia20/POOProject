@@ -1,16 +1,23 @@
 package com.project.app.aplicacionmovil;
 
 
+import java.util.ArrayList;
+
 public class Periodo {
-    private Actividades actividad;
+    private ArrayList<Actividades> actividad = new ArrayList<>();
     private int hora;
 
-    public Periodo(Actividades actividad, String color) {
+
+    public Periodo(ArrayList<Actividades> actividad, int hora) {
         this.actividad = actividad;
         this.hora = hora;
     }
 
-    public Actividades getActividad() {
+    public Periodo(){
+
+    }
+
+    public ArrayList<Actividades> getActividad() {
         return actividad;
     }
 

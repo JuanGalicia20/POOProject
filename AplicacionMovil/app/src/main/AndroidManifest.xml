@@ -13,7 +13,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".HorarioSeleccionado"
-            android:label="@string/title_activity_horario_seleccionado"
+            android:label="Horario"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Horarios" />
         <activity android:name=".activity_consejos_respuestas" />
