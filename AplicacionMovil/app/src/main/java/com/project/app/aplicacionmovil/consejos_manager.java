@@ -1,6 +1,9 @@
 package com.project.app.aplicacionmovil;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -81,8 +84,35 @@ public class consejos_manager extends AppCompatActivity {
     }
 
     public void openConsejos(String type) {
-        Intent intent = new Intent(this, activity_consejos_respuestas.class);
-        intent.putExtra("tipo", type);
-        startActivity(intent);
+        boolean con = conexion();
+        if(con)
+        {
+            Intent intent = new Intent(this, activity_consejos_respuestas.class);
+            intent.putExtra("tipo", type);
+            startActivity(intent);
+        }
+        else
+        {
+            Intent intent = new Intent(consejos_manager.this, Internet.class);
+            startActivity(intent);
+        }
+
+    }
+
+    public boolean conexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No está conectado a internet", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
     }
 }

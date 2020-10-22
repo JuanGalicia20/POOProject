@@ -1,8 +1,12 @@
 package com.project.app.aplicacionmovil;
 
 import java.util.HashMap;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -55,62 +59,70 @@ public class Registrarse extends AppCompatActivity {
         finRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean con = conexion();
+                if(con)
+                {
+                    String contra = txtBoxContra.getText().toString();
+                    String confirm = txtBoxConfirm.getText().toString();
 
-                String contra = txtBoxContra.getText().toString();
-                String confirm = txtBoxConfirm.getText().toString();
-
-                if(contra.equals(confirm)){
-                    HashMap<String, String> data = new HashMap<String, String>();
-                    data.put("user", txtBoxUsuario.getText().toString());
-                    data.put("email", txtBoxEmail.getText().toString());
-                    data.put("password", txtBoxContra.getText().toString());
-                    data.put("name", txtBoxNombre.getText().toString());
-                    data.put("birthday", txtBoxCumple.getText().toString());
-                    db.collection("Users").document(txtBoxUsuario.getText().toString()).set(data);
-                    openMenuPrincipal();
-                    Toast.makeText(getApplicationContext(), "Registrado Correctamente", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Contraseña incorrecta, intente de nuevo", Toast.LENGTH_LONG).show();
-                }
+                    if(contra.equals(confirm)){
+                        HashMap<String, String> data = new HashMap<String, String>();
+                        data.put("user", txtBoxUsuario.getText().toString());
+                        data.put("email", txtBoxEmail.getText().toString());
+                        data.put("password", txtBoxContra.getText().toString());
+                        data.put("name", txtBoxNombre.getText().toString());
+                        data.put("birthday", txtBoxCumple.getText().toString());
+                        db.collection("Users").document(txtBoxUsuario.getText().toString()).set(data);
+                        openMenuPrincipal();
+                        Toast.makeText(getApplicationContext(), "Registrado Correctamente", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Contraseña incorrecta, intente de nuevo", Toast.LENGTH_LONG).show();
+                    }
 
 
 
 
-               /** if (txtBoxUsuario.getText().toString().matches("") || txtBoxContra.getText().toString().matches("") || txtBoxNombre.getText().toString().matches("") ||
-                        txtBoxEmail.getText().toString().matches("") || txtBoxCumple.getText().toString().matches("")) {
-                    Toast.makeText(Registrarse.this, "Por favor llenar todos los campos", Toast.LENGTH_SHORT).show();
-                    return;
+                    /** if (txtBoxUsuario.getText().toString().matches("") || txtBoxContra.getText().toString().matches("") || txtBoxNombre.getText().toString().matches("") ||
+                     txtBoxEmail.getText().toString().matches("") || txtBoxCumple.getText().toString().matches("")) {
+                     Toast.makeText(Registrarse.this, "Por favor llenar todos los campos", Toast.LENGTH_SHORT).show();
+                     return;
+                     }
+                     else
+                     {
+                     SharedPreferences.Editor editor = pref.edit();
+                     editor.putString("Kusuario",txtBoxUsuario.getText().toString());
+                     editor.putString("Kcontra",txtBoxContra.getText().toString());
+                     editor.putString("Knombre",txtBoxNombre.getText().toString());
+                     editor.putString("Kemail",txtBoxEmail.getText().toString());
+                     editor.putString("Kcumple",txtBoxCumple.getText().toString());
+                     editor.commit();
+
+                     String usu = pref.getString("Kusuario","");
+                     String con = pref.getString("Kcontra","");
+                     String nom = pref.getString("Knombre","");
+                     String em = pref.getString("Kemail","");
+                     String cum = pref.getString("Kcumple","");
+
+                     if(usu != "" && con !="" && nom !="" && em !="" && cum !="")
+                     {
+                     showAlert("Bienvenido","Usuario registrado correctamente"+usu);
+                     System.out.println(usu+" "+con+" "+nom+" "+em+" "+cum);
+                     openMenuPrincipal();
+                     }
+                     else
+                     {
+                     System.out.println(usu+" "+con+" "+nom+" "+em+" "+cum);
+                     Toast.makeText(Registrarse.this, "Ocurrió un error", Toast.LENGTH_LONG).show();
+                     }
+
+                     }*/
                 }
                 else
                 {
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("Kusuario",txtBoxUsuario.getText().toString());
-                    editor.putString("Kcontra",txtBoxContra.getText().toString());
-                    editor.putString("Knombre",txtBoxNombre.getText().toString());
-                    editor.putString("Kemail",txtBoxEmail.getText().toString());
-                    editor.putString("Kcumple",txtBoxCumple.getText().toString());
-                    editor.commit();
-
-                    String usu = pref.getString("Kusuario","");
-                    String con = pref.getString("Kcontra","");
-                    String nom = pref.getString("Knombre","");
-                    String em = pref.getString("Kemail","");
-                    String cum = pref.getString("Kcumple","");
-
-                    if(usu != "" && con !="" && nom !="" && em !="" && cum !="")
-                    {
-                        showAlert("Bienvenido","Usuario registrado correctamente"+usu);
-                        System.out.println(usu+" "+con+" "+nom+" "+em+" "+cum);
-                        openMenuPrincipal();
-                    }
-                    else
-                    {
-                        System.out.println(usu+" "+con+" "+nom+" "+em+" "+cum);
-                        Toast.makeText(Registrarse.this, "Ocurrió un error", Toast.LENGTH_LONG).show();
-                    }
-
-                }*/
+                    Intent intent = new Intent(Registrarse.this, Internet.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -127,5 +139,22 @@ public class Registrarse extends AppCompatActivity {
         alert.setMessage(message);
         AlertDialog dialog = alert.create();
         dialog.show();
+    }
+
+    public boolean conexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No está conectado a internet", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
     }
 }

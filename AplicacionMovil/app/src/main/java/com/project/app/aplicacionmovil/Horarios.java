@@ -6,6 +6,8 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,10 +90,19 @@ public class Horarios extends AppCompatActivity {
         crearHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                closeKeyboard();
-                addHorario();
-                formulario.setVisibility(View.GONE);
-                nombreHorario.setText("");
+                boolean con = conexion();
+                if(con)
+                {
+                    closeKeyboard();
+                    addHorario();
+                    formulario.setVisibility(View.GONE);
+                    nombreHorario.setText("");
+                }
+                else
+                {
+                    Intent intent = new Intent(Horarios.this, Internet.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -213,45 +224,55 @@ public class Horarios extends AppCompatActivity {
     }
 
     public void createHorario(){
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
+        boolean con = conexion();
+        if(con)
+        {
+            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+            final LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
 
-        final ArrayList<String> names = new ArrayList<String>();
+            final ArrayList<String> names = new ArrayList<String>();
 
-        CollectionReference ConsejosReference = db.collection("Users").document(user).collection("Horarios");
-        ConsejosReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot doc : task.getResult().getDocuments()){
+            CollectionReference ConsejosReference = db.collection("Users").document(user).collection("Horarios");
+            ConsejosReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        for(DocumentSnapshot doc : task.getResult().getDocuments()){
 
-                        names.add((String)(doc.getId()));
+                            names.add((String)(doc.getId()));
 
+                        }
+                        for (int i = 0; i < names.size(); i++){
+                            newButton = new Button(getApplicationContext());
+                            newButton.setTag(names.get(i));
+                            newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
+                            newButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+                            newButton.setBackgroundResource(R.drawable.horarioback);
+                            newButton.setTextSize(20);
+                            newButton.setText(names.get(i));
+                            final int finalI = i;
+                            newButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    openHorarioSeleccionado(names.get(finalI));
+                                }
+                            });
+                            layout.addView(newButton);
+
+                        }
                     }
-                    for (int i = 0; i < names.size(); i++){
-                        newButton = new Button(getApplicationContext());
-                        newButton.setTag(names.get(i));
-                        newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
-                        newButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-                        newButton.setBackgroundResource(R.drawable.horarioback);
-                        newButton.setTextSize(20);
-                        newButton.setText(names.get(i));
-                        final int finalI = i;
-                        newButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                openHorarioSeleccionado(names.get(finalI));
-                            }
-                        });
-                        layout.addView(newButton);
-
+                    else{
+                        Toast.makeText(getApplicationContext(), "Failed, try again ", Toast.LENGTH_SHORT).show();
                     }
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Failed, try again ", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+        }
+        else
+        {
+            Intent intent = new Intent(Horarios.this, Internet.class);
+            startActivity(intent);
+        }
+
     }
 
 
@@ -277,6 +298,23 @@ public class Horarios extends AppCompatActivity {
         {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
+    public boolean conexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No está conectado a internet", Toast.LENGTH_SHORT).show();
+
+            return false;
         }
     }
 }

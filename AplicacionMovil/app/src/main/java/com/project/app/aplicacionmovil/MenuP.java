@@ -1,9 +1,13 @@
 package com.project.app.aplicacionmovil;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +37,17 @@ public class MenuP extends AppCompatActivity {
         btnHorarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            openMenuPrincipal(2, user);
+                boolean con = conexion();
+                if(con)
+                {
+                    openMenuPrincipal(2, user);
+                }
+                else
+                {
+                    Intent intent = new Intent(MenuP.this, Internet.class);
+                    startActivity(intent);
+                }
+
 
             }
         });
@@ -42,6 +56,16 @@ public class MenuP extends AppCompatActivity {
         btnTareas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean con = conexion();
+                if(con)
+                {
+
+                }
+                else
+                {
+                    Intent intent = new Intent(MenuP.this, Internet.class);
+                    startActivity(intent);
+                }
 
             }
         });
@@ -50,7 +74,17 @@ public class MenuP extends AppCompatActivity {
         btnConsejos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            openMenuPrincipal(4, user );
+                boolean con = conexion();
+                if(con)
+                {
+                    openMenuPrincipal(4, user );
+                }
+                else
+                {
+                    Intent intent = new Intent(MenuP.this, Internet.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -58,7 +92,17 @@ public class MenuP extends AppCompatActivity {
         btnPlanificacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenuPrincipal(5,user);
+                boolean con = conexion();
+                if(con)
+                {
+                    openMenuPrincipal(5,user);
+                }
+                else
+                {
+                    Intent intent = new Intent(MenuP.this, Internet.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -67,7 +111,17 @@ public class MenuP extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMenuPrincipal(1, user);
+                boolean con = conexion();
+                if(con)
+                {
+                    openMenuPrincipal(1, user);
+                }
+                else
+                {
+                    Intent intent = new Intent(MenuP.this, Internet.class);
+                    startActivity(intent);
+                }
+
             }
         });
     }
@@ -95,6 +149,23 @@ public class MenuP extends AppCompatActivity {
         {
             Intent intent = new Intent(this, Planificacion.class);
             startActivity(intent);
+        }
+    }
+
+    public boolean conexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No está conectado a internet", Toast.LENGTH_SHORT).show();
+
+            return false;
         }
     }
 }
