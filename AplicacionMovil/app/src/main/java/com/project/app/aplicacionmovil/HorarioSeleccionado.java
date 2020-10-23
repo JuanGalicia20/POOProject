@@ -1,7 +1,10 @@
 package com.project.app.aplicacionmovil;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -16,11 +19,21 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HorarioSeleccionado extends AppCompatActivity {
 
@@ -42,9 +55,15 @@ public class HorarioSeleccionado extends AppCompatActivity {
     private TextView txtNombre;
     private String nombreH;
     private String user;
-    private String[] diasCom={"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"};
+    private String[] diasCom={"Lunes","Martes","Miercoles","Jueves","Vriernes","Sabado","Domingo"};
     private String[] diaslv={"Lunes","Martes","Miercoles","Jueves","Viernes"};
     private ImageView crearAct;
+
+    private TextView txtInicio;
+    private TextView txtFin;
+    private Button iniciar;
+    private Button fin;
+    private int t1H,t1M,t2H,t2M;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +189,82 @@ public class HorarioSeleccionado extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+
+
+        final TextView txtInicio = (TextView)findViewById(R.id.txtinicio);
+        final TextView txtFin = (TextView)findViewById(R.id.txtfin);
+        Button iniciar = (Button) findViewById(R.id.inicio);
+        Button fin = (Button)findViewById(R.id.fin);
+        iniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        HorarioSeleccionado.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                t1H = hourOfDay;
+                                t1M = minute;
+
+                                String time = t1H + ":" + t1M;
+                                SimpleDateFormat f24Horas = new SimpleDateFormat(
+                                        "HH:mm"
+                                );
+                                try {
+                                    Date date = f24Horas.parse(time);
+                                    SimpleDateFormat f12Horas = new SimpleDateFormat(
+                                            "hh:mm aa"
+                                    );
+                                    txtInicio.setText(f12Horas.format(date));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },12,0,false
+                );
+
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(t1H,t1M);
+                timePickerDialog.show();
+            }
+        });
+
+        fin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        HorarioSeleccionado.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                t2H = hourOfDay;
+                                t2M = minute;
+
+                                String time = t2H + ":" + t2M;
+                                SimpleDateFormat f24Horas = new SimpleDateFormat(
+                                        "HH:mm"
+                                );
+                                try {
+                                    Date date = f24Horas.parse(time);
+                                    SimpleDateFormat f12Horas = new SimpleDateFormat(
+                                            "hh:mm aa"
+                                    );
+                                    txtFin.setText(f12Horas.format(date));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },12,0,false
+                );
+
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(t1H,t1M);
+                timePickerDialog.show();
             }
         });
     }

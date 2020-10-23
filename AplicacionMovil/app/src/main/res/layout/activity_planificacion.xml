@@ -25,7 +25,7 @@
             android:layout_marginBottom="0dp"
             android:adjustViewBounds="true"
             android:maxWidth="80dp"
-            android:maxHeight="100dp"
+            android:maxHeight="80dp"
             android:scaleType="fitCenter"
             android:src="@drawable/addevent"></ImageView>
 
