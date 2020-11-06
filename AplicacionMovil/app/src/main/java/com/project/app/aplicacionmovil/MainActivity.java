@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity{
 
     public boolean conexion()
     {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if(networkInfo!=null && networkInfo.isConnected())
