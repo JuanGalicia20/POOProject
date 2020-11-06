@@ -227,7 +227,7 @@ public class Horarios extends AppCompatActivity {
         boolean con = conexion();
         if(con)
         {
-            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+
             final LinearLayout layout = (LinearLayout) findViewById(R.id.rootlayout);
 
             final ArrayList<String> names = new ArrayList<String>();
