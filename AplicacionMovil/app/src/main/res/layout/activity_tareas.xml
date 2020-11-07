@@ -14,14 +14,14 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/nuevohorario"
+            android:id="@+id/nuevaTareaCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="10dp"
             app:cardCornerRadius="15dp"
-            tools:visibility="gone">
+            tools:visibility="VISible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,11 +60,11 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/amaranth"
-                    android:text="Ingrese el nombre de su nuevo horario:"
+                    android:text="Ingrese la información de su nueva tarea:"
                     android:textSize="15dp" />
 
                 <EditText
-                    android:id="@+id/txtViewNHorario"
+                    android:id="@+id/titleTarea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
@@ -74,40 +74,24 @@
                     android:hint="Nombre de la tarea"
                     android:inputType="textPersonName" />
 
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                <EditText
+                    android:id="@+id/editDTarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="40dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/radioButtonCompleta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="#50C7AC"
-                        android:checked="true"
-                        android:text="Semana Completa" />
-
-                    <RadioButton
-                        android:id="@+id/radioButtonLV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="#50C7AC"
-                        android:layout_marginLeft="20dp"
-
-                        android:text="Lunes a viernes" />
-                </RadioGroup>
+                    android:layout_marginRight="25dp"
+                    android:ems="10"
+                    android:hint="Descripción de la tarea"
+                    android:inputType="textPersonName" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonCrearHorario"
+                    android:id="@+id/iBtnTarea"
                     android:layout_width="320dp"
                     android:layout_height="70dp"
                     android:layout_marginBottom="40dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/bthorario" />
+                    app:srcCompat="@drawable/btnTarea" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -123,29 +107,24 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/amaranth"
-                android:text="Pendientes"
+                android:text="Mis tareas"
                 android:textColor="@android:color/white"
                 android:textSize="34sp" />
 
         </RelativeLayout>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </TableLayout>
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
+            android:id="@+id/actionBtnTarea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:layout_gravity="right"
             app:srcCompat="@drawable/mas" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
 
     </LinearLayout>
