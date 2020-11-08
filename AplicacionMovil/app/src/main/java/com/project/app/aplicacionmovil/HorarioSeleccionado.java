@@ -69,6 +69,8 @@ public class HorarioSeleccionado extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+
+
         this.nombreH = intent.getStringExtra("Horario");
         this.user = intent.getStringExtra("User");
         setContentView(R.layout.activity_horario_seleccionado);
@@ -267,6 +269,7 @@ public class HorarioSeleccionado extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
     }
 
     private void closeKeyboard()
