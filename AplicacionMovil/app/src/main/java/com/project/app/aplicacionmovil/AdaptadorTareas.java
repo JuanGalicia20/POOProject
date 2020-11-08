@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class AdaptadorTareas extends RecyclerView.Adapter<AdaptadorTareas.ViewHolderTareas>{
 
     private ArrayList<ObjetoTareas> listaTareas;
+
+    public AdaptadorTareas(ArrayList<ObjetoTareas> listaTareas) {
+        this.listaTareas = listaTareas;
+    }
+
     @NonNull
     @Override
     public AdaptadorTareas.ViewHolderTareas onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
