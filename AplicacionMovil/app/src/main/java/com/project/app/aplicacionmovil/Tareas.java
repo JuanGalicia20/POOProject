@@ -11,10 +11,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -32,9 +35,16 @@ public class Tareas extends AppCompatActivity {
     private ImageButton iBtnTarea;
     private CardView nuevaTareaCard;
     private ImageView imageClose;
+    private RecyclerView recycler;
+    private AdaptadorTareas nuevoAdaptador;
 
     protected void onCreate(Bundle savedInstanceState ){
         super.onCreate(savedInstanceState);
+        recycler = (RecyclerView) findViewById(R.id.recyclerTareas);
+        listaTareas = new ArrayList<ObjetoTareas>();
+        recycler.setLayoutManager(new GridLayoutManager(this,2));
+        nuevoAdaptador = new AdaptadorTareas(listaTareas);
+        recycler.setAdapter(nuevoAdaptador);
         titleTarea = (EditText) findViewById(R.id.titleTarea);
         editDTarea = (EditText) findViewById(R.id.editDTarea);
         iBtnTarea = (ImageButton) findViewById(R.id.iBtnTarea);
@@ -59,6 +69,8 @@ public class Tareas extends AppCompatActivity {
         iBtnTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                titulo = titleTarea.getText().toString();
+                descripcion = editDTarea.getText().toString();
                 nuevaTareaCard.setVisibility(View.GONE);
             }
         });
@@ -92,6 +104,12 @@ public class Tareas extends AppCompatActivity {
         }
     }
 
-
+    private void nuevasTareas(){
+        listaTareas.add(new ObjetoTareas("Ejercicio", "3 EJERCICIOS DE CALCULO"));
+        listaTareas.add(new ObjetoTareas("Almuerzos", "COMIDAAS"));
+        listaTareas.add(new ObjetoTareas("Tb4tf", "3 bt4efbte"));
+        listaTareas.add(new ObjetoTareas("reomp", "ve0ijmbi0´qepbnvm0i´3pqr"));
+        listaTareas.add(new ObjetoTareas("Ej", "3 ECALCULO"));
+    }
 
 }
