@@ -243,11 +243,17 @@ public class Horarios extends AppCompatActivity {
 
                         }
                         for (int i = 0; i < names.size(); i++){
+
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            params.setMargins(0, 5, 0, 5);
+
+
                             newButton = new Button(getApplicationContext());
                             newButton.setTag(names.get(i));
                             newButton.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
                             newButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
                             newButton.setBackgroundResource(R.drawable.horarioback);
+                            newButton.setLayoutParams(params);
                             newButton.setTextSize(20);
                             newButton.setText(names.get(i));
                             final int finalI = i;

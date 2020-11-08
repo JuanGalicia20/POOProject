@@ -59,7 +59,7 @@ public class MenuP extends AppCompatActivity {
                 boolean con = conexion();
                 if(con)
                 {
-
+                    openMenuPrincipal(3, user);
                 }
                 else
                 {
@@ -138,6 +138,11 @@ public class MenuP extends AppCompatActivity {
             intent.putExtra("User", user);
             startActivity(intent);
         }
+        else if(opcion == 3)
+        {
+            Intent intent = new Intent(this, Tareas.class);
+            startActivity(intent);
+        }
 
         else if(opcion == 4)
         {
@@ -150,6 +155,7 @@ public class MenuP extends AppCompatActivity {
             Intent intent = new Intent(this, Planificacion.class);
             startActivity(intent);
         }
+
     }
 
     public boolean conexion()

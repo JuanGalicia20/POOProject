@@ -39,7 +39,9 @@ public class Tareas extends AppCompatActivity {
     private AdaptadorTareas nuevoAdaptador;
 
     protected void onCreate(Bundle savedInstanceState ){
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tareas);
         recycler = (RecyclerView) findViewById(R.id.recyclerTareas);
         listaTareas = new ArrayList<ObjetoTareas>();
         recycler.setLayoutManager(new GridLayoutManager(this,2));
@@ -74,7 +76,7 @@ public class Tareas extends AppCompatActivity {
                 nuevaTareaCard.setVisibility(View.GONE);
             }
         });
-
+        nuevasTareas();
     }
 
     public boolean conexion()

@@ -91,7 +91,7 @@
                     android:layout_height="70dp"
                     android:layout_marginBottom="40dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/btnTarea" />
+                    app:srcCompat="@drawable/btntarea" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -123,6 +123,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerTareas"
+            android:layout_marginTop="35dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

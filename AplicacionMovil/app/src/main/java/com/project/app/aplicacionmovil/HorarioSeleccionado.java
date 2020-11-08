@@ -373,13 +373,39 @@ public class HorarioSeleccionado extends AppCompatActivity {
 
                                         for(DocumentSnapshot doc : task.getResult().getDocuments()){
                                             ArrayList<String> info = new ArrayList<>();
-                                           Map<String, Object> d1 = doc.getData();
 
+                                            String content;
+
+                                            try{
+                                                info.add(doc.get("name").toString());
+                                                info.add(doc.get("inicio").toString());
+                                                info.add(doc.get("final").toString());
+
+                                                content = "" + info.get(0) + "\nDe: " + info.get(1) + "\t Hasta: " + info.get(2);
+
+                                                Button newButton = new Button(getApplicationContext());
+                                                newButton.setTag(info.get(0));
+                                                newButton.setText(content);
+
+                                                diasLl.get(j-1).addView(newButton);
+                                            }
+                                            catch (java.lang.NullPointerException e){
+                                                content = "Sin registros";
+                                                Button newButton = new Button(getApplicationContext());
+                                                newButton.setTag(content);
+                                                newButton.setText(content);
+
+                                                diasLl.get(j-1).addView(newButton);
+                                            }
+
+
+                                           /*System.out.println(doc.get("name"));
                                             for (Map.Entry entry : d1.entrySet())
                                             {
                                                 info.add(entry.getValue().toString());
                                             }
                                             String content;
+
                                             if(info.size() == 0){
                                                 content = "Sin registros";
                                                 Button newButton = new Button(getApplicationContext());
@@ -402,7 +428,8 @@ public class HorarioSeleccionado extends AppCompatActivity {
                                                 newButton.setText(content);
 
                                                 diasLl.get(j-1).addView(newButton);
-                                            }
+                                            }*/
+
                                         }
                                     }
                                 }
@@ -421,32 +448,25 @@ public class HorarioSeleccionado extends AppCompatActivity {
 
                                         for(DocumentSnapshot doc : task.getResult().getDocuments()){
                                             ArrayList<String> info = new ArrayList<>();
-                                            Map<String, Object> d1 = doc.getData();
 
-                                            for (Map.Entry entry : d1.entrySet())
-                                            {
-                                                info.add(entry.getValue().toString());
-                                            }
                                             String content;
-                                            if(info.size() == 0){
-                                                content = "Sin registros";
+                                            try{
+                                                info.add(doc.get("name").toString());
+                                                info.add(doc.get("inicio").toString());
+                                                info.add(doc.get("final").toString());
+
+                                                content = "" + info.get(0) + "\nDe: " + info.get(1) + "\t Hasta: " + info.get(2);
+
                                                 Button newButton = new Button(getApplicationContext());
-                                                newButton.setTag(content);
+                                                newButton.setTag(info.get(0));
                                                 newButton.setText(content);
 
                                                 diasLl.get(j-1).addView(newButton);
                                             }
-                                            else {
-                                                String[] parts = info.get(0).split("");
-                                                if(parts.length == 9 && parts[8].equals("M") && (parts[1].equals("1") || parts[1].equals("0"))){
-                                                    content = "" + info.get(1) + "\nDe: " + info.get(0) + "\t Hasta: " + info.get(2);
-                                                }
-                                                else{
-                                                    content = "" + info.get(0) + "\nDe: " + info.get(1) + "\t Hasta: " + info.get(3);
-                                                }
-
+                                            catch (java.lang.NullPointerException e){
+                                                content = "Sin registros";
                                                 Button newButton = new Button(getApplicationContext());
-                                                newButton.setTag(info.get(0));
+                                                newButton.setTag(content);
                                                 newButton.setText(content);
 
                                                 diasLl.get(j-1).addView(newButton);
@@ -460,11 +480,11 @@ public class HorarioSeleccionado extends AppCompatActivity {
                         }
                     }
                 }
+                else{
+                    Toast.makeText(getApplicationContext(), "Parece que ocurrio un error, intenta de nuevo.", Toast.LENGTH_LONG).show();
+                }
             }
         });
-
-        db.collection("Users").document(user).collection("Horarios").document(nombreH).collection("Lunes");
-
 
     }
 

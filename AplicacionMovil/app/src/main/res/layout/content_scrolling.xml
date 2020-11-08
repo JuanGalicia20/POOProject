@@ -220,11 +220,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -293,11 +289,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -367,11 +359,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -441,11 +429,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -515,11 +499,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -590,11 +570,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -665,11 +641,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#FFFF"
-                        android:text="Prueba" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
