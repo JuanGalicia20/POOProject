@@ -73,7 +73,10 @@ public class Tareas extends AppCompatActivity {
             public void onClick(View v) {
                 titulo = titleTarea.getText().toString();
                 descripcion = editDTarea.getText().toString();
+                addTarea(titulo, descripcion);
                 nuevaTareaCard.setVisibility(View.GONE);
+                titleTarea.setText("");
+                editDTarea.setText("");
             }
         });
         nuevasTareas();
@@ -107,11 +110,18 @@ public class Tareas extends AppCompatActivity {
     }
 
     private void nuevasTareas(){
-        listaTareas.add(new ObjetoTareas("Ejercicio", "3 EJERCICIOS DE CALCULO"));
-        listaTareas.add(new ObjetoTareas("Almuerzos", "COMIDAAS"));
-        listaTareas.add(new ObjetoTareas("Tb4tf", "3 bt4efbte"));
-        listaTareas.add(new ObjetoTareas("reomp", "ve0ijmbi0´qepbnvm0i´3pqr"));
-        listaTareas.add(new ObjetoTareas("Ej", "3 ECALCULO"));
+        listaTareas.add(new ObjetoTareas("Lab 9", "3 EJERCICIOS DE CALCULO"));
+        listaTareas.add(new ObjetoTareas("Proyecto estadística", "COMIDAAS"));
+        listaTareas.add(new ObjetoTareas("Ejercitación", "3 ejercicios"));
+        listaTareas.add(new ObjetoTareas("Proyecto física", "proyecto final"));
+        listaTareas.add(new ObjetoTareas("Marco teórico", "conceptualización para trabajo final"));
+    }
+
+    private void addTarea(String titulo, String descripcion){
+        ObjetoTareas nuevaTarea = new ObjetoTareas(titulo, descripcion);
+        listaTareas.add(nuevaTarea);
+        nuevoAdaptador.notifyItemInserted(listaTareas.size()-1);
+
     }
 
 }
