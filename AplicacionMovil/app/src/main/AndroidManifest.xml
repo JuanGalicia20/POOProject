@@ -15,6 +15,7 @@
         <activity android:name=".Internet"></activity>
         <activity android:name=".Planificacion" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".Tareas"/>
         <activity
             android:name=".HorarioSeleccionado"
             android:label="Horario"
