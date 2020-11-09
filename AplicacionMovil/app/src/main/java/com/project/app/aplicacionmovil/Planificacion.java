@@ -24,7 +24,12 @@ import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.type.DateTime;
 
 import java.text.ParseException;
@@ -45,6 +50,7 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
     private TextView fecha;
     private TextView tituloPlanificacion, tituloCalendario;
     private FloatingActionButton nuevoEvento;
+    private String user;
 
     private ArrayList<ObjetosPlanificacion> listaEventos, eventosSeleccionados;
     private RecyclerView recyclerEventos, recyclerSelecionados;
@@ -62,17 +68,15 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent intent = getIntent();
+        user = intent.getStringExtra("User");
         date = new Date(120,10,3);
         eventosTotales = new HashMap<>();
         setContentView(R.layout.activity_planificacion);
         tituloPlanificacion=(TextView)findViewById(R.id.tituloPlanificacion);
 
-        listaEventos = new ArrayList<>();
-        recyclerEventos = findViewById(R.id.recyclerview);
-        recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AdaptadorPlanificacion(listaEventos);
-        recyclerEventos.setAdapter(adapter);
+
+
 
 
 
@@ -82,46 +86,11 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
         int month = c.get(Calendar.MONTH);
         String currentTime = meses[month]+" / "+year;
         tituloCalendario.setText(currentTime.toString());
-        calendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
-        calendarView.setUseThreeLetterAbbreviation(true);
-        calendarView.setShouldShowMondayAsFirstDay(true);
 
-        llenarEventos();
 
-        calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
-            @Override
-            public void onDayClick(Date dateClicked) {
-                date = dateClicked;
-                Context context = getApplicationContext();
-                long diaEpoch = dateClicked.getTime();
+        llenarPlanificacion();
 
-                ArrayList<ObjetosPlanificacion> enviarSeleccion = new ArrayList<>();
-                //ya se tienen los eventos por MesAño (verificar) falta mostrarlo en el popup}
-                for(ObjetosPlanificacion objP : listaEventos)
-                {
-                    if(objP.getFecha().getTime() == diaEpoch)
-                    {
-                        enviarSeleccion.add(objP);
-                    }
-                }
-                System.out.println(enviarSeleccion);
 
-                ArrayList<Event> events = (ArrayList<Event>) calendarView.getEvents(diaEpoch);
-                if(enviarSeleccion.size() > 0)
-                {
-                    openSelectedEvent(events,enviarSeleccion);
-                }
-                else
-                {
-                    Toast.makeText(context,"No hay eventos",Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMonthScroll(Date firstDayOfNewMonth) {
-                tituloCalendario.setText(dateFormatMonth.format(firstDayOfNewMonth));
-            }
-        });
 
 
         nuevoEvento = (FloatingActionButton)findViewById(R.id.floatingNewEvent);
@@ -145,7 +114,7 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
 
     public void openDialog()
     {
-        Dialog dialog = new Dialog(date);
+        Dialog dialog = new Dialog(date, user);
         dialog.show(getSupportFragmentManager(),"Example Dialog");
     }
 
@@ -155,41 +124,77 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
         dialogEvent.show(getSupportFragmentManager(),"Example");
     }
 
+    
+    public void llenarPlanificacion(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(user).collection("Planificaciones").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                listaEventos = new ArrayList<>();
+                calendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
+                calendarView.setUseThreeLetterAbbreviation(true);
+                calendarView.setShouldShowMondayAsFirstDay(true);
+                calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+                    @Override
+                    public void onDayClick(Date dateClicked) {
+                        date = dateClicked;
+                        Context context = getApplicationContext();
+                        long diaEpoch = dateClicked.getTime();
 
-    public void llenarEventos()
-    {
-        boolean con = conexion();
-        if(con)
-        {
-            listaEventos.add(new ObjetosPlanificacion("Reunion", new Date(120,9,26),"12:20","14:20","#01DFD7",""));
-            listaEventos.add(new ObjetosPlanificacion("Partido",new Date(120,10,27),"10:00","11:00","#0174DF",""));
-            listaEventos.add(new ObjetosPlanificacion("Proyecto",new Date(120,10,20),"00:00","23:59","#00FF40",""));
-            listaEventos.add(new ObjetosPlanificacion("Serie",new Date(120,11,25),"12:20","14:20","#FF8000",""));
-            Event ev11 = new Event(Color.RED,1603670400000L, "Cumpleaños tio");
-            calendarView.addEvent(ev11);
-            Event ev2 = new Event(Color.BLUE,1606435200000L, "Feriado");
-            calendarView.addEvent(ev2);
-            Event ev3 = new Event(Color.BLACK,1605830400000L, "Vacaciones");
-            calendarView.addEvent(ev3);
-            Event ev4 = new Event(Color.YELLOW,1608854400000L, "Navidad");
-            calendarView.addEvent(ev4);
+                        ArrayList<ObjetosPlanificacion> enviarSeleccion = new ArrayList<>();
+                        //ya se tienen los eventos por MesAño (verificar) falta mostrarlo en el popup}
+                        for(ObjetosPlanificacion objP : listaEventos)
+                        {
+                            if(objP.getFecha().getTime() == diaEpoch)
+                            {
+                                enviarSeleccion.add(objP);
+                            }
+                        }
+                        System.out.println(enviarSeleccion);
 
-            ArrayList<ObjetosPlanificacion> a1 = new ArrayList<>();
-            a1.add(new ObjetosPlanificacion("Reunion", new Date(120,9,26),"12:20","14:20","#01DFD7",""));
-            eventosTotales.put("202010",a1);
-            ArrayList<ObjetosPlanificacion> a2 = new ArrayList<>();
-            a2.add(new ObjetosPlanificacion("Partido",new Date(120,10,27),"10:00","11:00","#0174DF",""));
-            a2.add(new ObjetosPlanificacion("Proyecto",new Date(120,10,20),"00:00","23:59","#00FF40",""));
-            eventosTotales.put("202011",a2);
-            ArrayList<ObjetosPlanificacion> a3 = new ArrayList<>();
-            a3.add(new ObjetosPlanificacion("Serie",new Date(120,11,25),"12:20","14:20","#FF8000",""));
-            eventosTotales.put("202010",a3);
-        }
-        else
-        {
-            Intent intent = new Intent(Planificacion.this, Internet.class);
-            startActivity(intent);
-        }
+                        ArrayList<Event> events = (ArrayList<Event>) calendarView.getEvents(diaEpoch);
+                        if(enviarSeleccion.size() > 0)
+                        {
+                            openSelectedEvent(events,enviarSeleccion);
+                        }
+                        else
+                        {
+                            Toast.makeText(context,"No hay eventos",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onMonthScroll(Date firstDayOfNewMonth) {
+                        tituloCalendario.setText(dateFormatMonth.format(firstDayOfNewMonth));
+                    }
+                });
+
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                        String[] info = new String[6];
+
+                        info[0] = doc.get("name").toString();
+                        info[1] = doc.get("descripcion").toString();
+                        info[2] = doc.get("fecha").toString();
+                        info[3] = doc.get("horaInicio").toString();
+                        info[4] = doc.get("horaFinal").toString();
+                        info[5] = doc.get("color").toString();
+
+
+                        Long fecha1 = Long.parseLong(info[2]);
+                        Date d = new Date(fecha1);
+                        Event ev1 = new Event(Color.parseColor(info[5]), fecha1, info[0]);
+                        calendarView.addEvent(ev1);
+                       listaEventos.add(new ObjetosPlanificacion(info[0], d, info[3], info[4], info[5], info[1]));
+
+                    }
+                    recyclerEventos = findViewById(R.id.recyclerview);
+                    recyclerEventos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    adapter = new AdaptadorPlanificacion(listaEventos);
+                    recyclerEventos.setAdapter(adapter);
+                }
+            }
+        });
     }
     public void addEvento(String titulo, Date fecha,String horaIn,String horaFin,String color, String descripcion)
     {

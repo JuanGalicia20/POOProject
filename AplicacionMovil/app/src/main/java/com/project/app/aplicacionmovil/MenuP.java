@@ -154,6 +154,7 @@ public class MenuP extends AppCompatActivity {
         else if(opcion == 5)
         {
             Intent intent = new Intent(this, Planificacion.class);
+            intent.putExtra("User", user);
             startActivity(intent);
         }
 

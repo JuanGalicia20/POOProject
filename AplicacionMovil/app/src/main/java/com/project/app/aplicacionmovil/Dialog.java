@@ -19,10 +19,12 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.core.content.ContextCompat;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -39,11 +41,13 @@ public class Dialog  extends AppCompatDialogFragment {
     private Date fechaFinal;
     private DialogListener dialogListener;
     private CompactCalendarView calendarView;
+    private String user;
 
 
-    public Dialog(Date date)
+    public Dialog(Date date, String user)
     {
         fechaFinal=date;
+        this.user = user;
     }
 
     @NonNull
@@ -68,6 +72,7 @@ public class Dialog  extends AppCompatDialogFragment {
                         titulo=tituloEvento.getText().toString();
                         desc=descEvento.getText().toString();
                         sendColor = String.format("#%06X",0xFFFFFF & defaultColor);
+                        addPlanificacion();
 
                         dialogListener.sendValues(titulo,fechaFinal,timeIn,timeOut,sendColor,desc);
 
@@ -174,6 +179,25 @@ public class Dialog  extends AppCompatDialogFragment {
             }
         });
         colorPicker.show();
+    }
+
+    public void addPlanificacion(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        HashMap<String, String> data = new HashMap<>();
+        System.out.println(fechaFinal.getTime());
+        String color = String.valueOf(defaultColor);
+        String fecha = String.valueOf(fechaFinal.getTime());
+
+        data.put("name", tituloEvento.getText().toString());
+        data.put("descripcion", descEvento.getText().toString());
+        data.put("horaInicio", timeIn);
+        data.put("horaFinal", timeOut);
+        data.put("color", sendColor);
+        data.put("fecha", fecha);
+
+        db.collection("Users").document(user).collection("Planificaciones").document(titulo).set(data);
+
+
     }
 
 
