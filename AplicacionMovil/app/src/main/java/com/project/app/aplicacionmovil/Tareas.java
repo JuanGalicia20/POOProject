@@ -77,7 +77,6 @@ public class Tareas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addTarea();
-
             }
         });
         nuevasTareas();
@@ -177,7 +176,5 @@ public class Tareas extends AppCompatActivity {
 
 
     }
-
-
 
 }
