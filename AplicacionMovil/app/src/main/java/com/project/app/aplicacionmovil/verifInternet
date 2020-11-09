@@ -1,0 +1,54 @@
+TUTORIAL VERIFICACION INTERNET
+
+Actualmente solo tenemos una conexion remota a la base de datos en linea, por lo que tenemos que
+verificar constantemente si el usuario posee o no internet. El objetivo es poder realizar una
+base de datos asincrona tambien, pero eso se hara en futuras versiones. Por lo que cuando realicen
+actividades donde necesitan leer, escribir o cualquier cosa que tenga que ver con la base de datos
+deben realizar la siguiente verificacion. Por el momento la verificacion se esta haciendo con un
+metodo que esta en cada clase, pero se esta investigando como implementarlo en una clase y llamarlo
+como metodo de un objeto.
+
+**El siguiente metodo es el que realiza la verificacion, por lo que solo deben copiarlo y pegarlo
+en la actividad donde esten trabajando**
+
+public boolean conexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(this, "No está conectado a internet", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+    }
+
+**Luego deben de realizar la siguiente comprobacion, ya que el metodo anterior devuelve un valor
+booleano si existe (verdadero) o si no (falso). Es un if... else... donde en el if... se maneja la
+situacion que sucede si tiene conexion (practicamente todo lo que querian hacer normalmente)
+luego en el else... deben de colocar lo siguiente:***
+
+Intent intent = new Intent(MainActivity.this, Internet.class);
+startActivity(intent);
+
+**Se adjunta un ejemplo de ambas circunstancias traidas desde el MainActivity para ver si tiene
+internet para ingresar a Registrarse**
+
+        boolean con = conexion();
+        if(con)
+        {
+            openActividad(2);
+        }
+        else
+        {
+            Intent intent = new Intent(MainActivity.this, Internet.class);
+            startActivity(intent);
+        }
+
+**todo esto esta dentro de un click listener del boton registrarse, para que tengan una idea de
+donde y como se utilizo ese ejemplo**
