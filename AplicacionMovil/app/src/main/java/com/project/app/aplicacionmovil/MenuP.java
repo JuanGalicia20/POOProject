@@ -141,6 +141,7 @@ public class MenuP extends AppCompatActivity {
         else if(opcion == 3)
         {
             Intent intent = new Intent(this, Tareas.class);
+            intent.putExtra("User", user);
             startActivity(intent);
         }
 
