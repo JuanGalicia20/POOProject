@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Planificacion"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/logoPlanificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFF">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="0dp"
+            android:adjustViewBounds="true"
+            android:maxWidth="80dp"
+            android:maxHeight="80dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/addevent"></ImageView>
+
+        <TextView
+            android:id="@+id/tituloPlanificacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="26dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Planificacion"
+            android:textColor="#000000"
+            android:textSize="40dp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="330dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/roundcorner"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tituloCalendario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mes-año"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"></TextView>
+
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/compactcalendar_view"
+            android:layout_width="360dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            app:compactCalendarBackgroundColor="#FFFF"
+            app:compactCalendarCurrentDayBackgroundColor="@color/colorPrimary"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorAccent"
+            app:compactCalendarMultiEventIndicatorColor="#30BC64"
+            app:compactCalendarTargetHeight="250dp"
+            app:compactCalendarTextColor="#000000"
+            app:compactCalendarTextSize="12sp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingNewEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mas" />
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/scrolling_planificacion"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
