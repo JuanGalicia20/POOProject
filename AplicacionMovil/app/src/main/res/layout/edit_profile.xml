@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundhorarios"
+    android:weightSum="10"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="245dp"
+            android:layout_height="129dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="87dp"
+            android:layout_marginEnd="82dp"
+            android:layout_marginBottom="443dp"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="@dimen/ambilwarna_hsvHeight"
+            android:fontFamily="@font/amaranth"
+            android:text="Nombre"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="45dp" />
+
+        <Button
+            android:id="@+id/btnCUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="62dp"
+            android:layout_marginEnd="61dp"
+            android:layout_marginBottom="351dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Cambiar usuario"
+            android:textColor="@android:color/white"
+            android:textSize="25dp"
+            android:background="#20B2AA"/>
+
+        <Button
+            android:id="@+id/btnCPassword"
+            android:layout_width="289dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="274dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Cambiar contraseña"
+            android:textColor="@android:color/white"
+            android:background="#1B9891"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/btnCEmail"
+            android:layout_width="293dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginEnd="57dp"
+            android:layout_marginBottom="194dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Cambiar correo"
+            android:textColor="@android:color/white"
+            android:background="#167F79"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/btnDeleteC"
+            android:layout_width="289dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginEnd="61dp"
+            android:layout_marginBottom="116dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Borrar cuenta"
+            android:textColor="@android:color/white"
+            android:background="#126561"
+            android:textSize="25dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
