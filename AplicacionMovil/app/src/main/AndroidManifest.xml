@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.project.app.aplicacionmovil">
+    package="com.project.app.aplicacionmovil" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,11 +11,11 @@
         android:label="Hollege"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Internet"></activity>
+        android:theme="@style/AppTheme" >
+        <activity android:name=".Internet" />
         <activity android:name=".Planificacion" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Tareas"/>
+        <activity android:name=".Tareas" />
         <activity
             android:name=".HorarioSeleccionado"
             android:label="Horario"
@@ -28,7 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MenuP" />
         <activity android:name=".Registrarse" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

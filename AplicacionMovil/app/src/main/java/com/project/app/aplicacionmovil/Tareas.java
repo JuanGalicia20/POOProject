@@ -76,11 +76,31 @@ public class Tareas extends AppCompatActivity {
         iBtnTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTarea();
-
+                boolean con = conexion();
+                if(con)
+                {
+                    closeKeyboard();
+                    addTarea();
+                    nuevaTareaCard.setVisibility(View.GONE);
+                }
+                else
+                {
+                    Intent intent = new Intent(Tareas.this, Internet.class);
+                    startActivity(intent);
+                }
             }
         });
-        nuevasTareas();
+        boolean con2 = conexion();
+        if(con2)
+        {
+            nuevasTareas();
+        }
+        else
+        {
+            Intent intent2 = new Intent(Tareas.this, Internet.class);
+            startActivity(intent);
+        }
+
 
     }
 
