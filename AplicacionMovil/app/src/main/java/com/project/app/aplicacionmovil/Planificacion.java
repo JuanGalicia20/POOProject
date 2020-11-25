@@ -115,7 +115,7 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
         dialogEvent.show(getSupportFragmentManager(),"Example");
     }
 
-    
+
     public void llenarPlanificacion(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Users").document(user).collection("Planificaciones").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
