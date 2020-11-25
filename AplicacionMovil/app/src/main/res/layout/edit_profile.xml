@@ -168,7 +168,7 @@
                 android:layout_marginRight="25dp"
                 android:ems="10"
                 android:hint="Nuevo e-mail"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/txtViewConfirmarPE"

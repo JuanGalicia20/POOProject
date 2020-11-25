@@ -80,7 +80,7 @@
                     android:layout_marginRight="25dp"
                     android:ems="10"
                     android:hint="Descripción de la tarea"
-                    android:inputType="textPersonName" />
+                    android:inputType="textMultiLine" />
 
                 <ImageButton
                     android:id="@+id/iBtnTarea"

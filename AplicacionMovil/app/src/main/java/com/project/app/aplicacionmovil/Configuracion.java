@@ -1,9 +1,13 @@
 package com.project.app.aplicacionmovil;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +29,7 @@ import java.util.HashMap;
 
 public class Configuracion extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private String user;
+    private String user,nombre;
     private NavigationView navigationView;
     private ImageView abrirMenu;
     private ImageView cusuario, ccontra, ccorreo, cborrar;
@@ -41,8 +45,9 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
 
         final Intent intent = getIntent();
         this.user = intent.getStringExtra("User");
+        this.nombre = intent.getStringExtra("Nombre");
         nom=findViewById(R.id.nombreConfig);
-        nom.setText(user);
+        nom.setText(nombre);
 
         txtNewContra = (TextView)findViewById(R.id.txtViewCPassword);
         txtConfirmNewPass = (TextView)findViewById(R.id.txtViewCNPassword);
@@ -130,42 +135,49 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         conCon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FirebaseFirestore db = FirebaseFirestore.getInstance();
-                if(txtNewContra.getText().toString().equals(txtConfirmNewPass.getText().toString())){
-                    db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if(documentSnapshot.exists() == true){
-                                String contra = (String) documentSnapshot.get("password");
-                                if(contra.equals(txtViejaContra.getText().toString())){
-                                    db.collection("Users").document(user).update("password", txtNewContra.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(getApplicationContext(), "Contraseña cambiada exitosamente", Toast.LENGTH_SHORT).show();
-                                            cdcontra.setVisibility(View.GONE);
-                                            cdcorreo.setVisibility(View.GONE);
-                                            cdborrar.setVisibility(View.GONE);
-                                            constraintEdit.setVisibility(View.VISIBLE);
-                                        }
-                                    });
+                boolean con = conexion();
+                if(con)
+                {
+                    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    if(txtNewContra.getText().toString().equals(txtConfirmNewPass.getText().toString())){
+                        db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists() == true){
+                                    String contra = (String) documentSnapshot.get("password");
+                                    if(contra.equals(txtViejaContra.getText().toString())){
+                                        db.collection("Users").document(user).update("password", txtNewContra.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getApplicationContext(), "Contraseña cambiada exitosamente", Toast.LENGTH_SHORT).show();
+                                                cdcontra.setVisibility(View.GONE);
+                                                cdcorreo.setVisibility(View.GONE);
+                                                cdborrar.setVisibility(View.GONE);
+                                                constraintEdit.setVisibility(View.VISIBLE);
+                                            }
+                                        });
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "Parece que la contraseña anterior no coincide con la ingresada, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 else{
-                                    Toast.makeText(getApplicationContext(), "Parece que la contraseña anterior no coincide con la ingresada, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
                                 }
                             }
-                            else{
-                                Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                        });
 
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Parece que las contraseñas ingresadas no coinciden, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                    }
+                    closeKeyboard();
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Parece que las contraseñas ingresadas no coinciden, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                else
+                {
+                    Intent intent = new Intent(Configuracion.this, Internet.class);
+                    startActivity(intent);
                 }
-
-
-
             }
         });
 
@@ -185,34 +197,43 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         conCor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot.exists() == true){
-                            String contra = (String) documentSnapshot.get("password");
-                            if(contra.equals(txtConfContra.getText().toString())){
-                                db.collection("Users").document(user).update("email", txtEmail.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(getApplicationContext(), "Email cambiado exitosamente", Toast.LENGTH_SHORT).show();
-                                        cdcontra.setVisibility(View.GONE);
-                                        cdcorreo.setVisibility(View.GONE);
-                                        cdborrar.setVisibility(View.GONE);
-                                        constraintEdit.setVisibility(View.VISIBLE);
-                                    }
-                                });
+                boolean con = conexion();
+                if(con)
+                {
+                    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists() == true){
+                                String contra = (String) documentSnapshot.get("password");
+                                if(contra.equals(txtConfContra.getText().toString())){
+                                    db.collection("Users").document(user).update("email", txtEmail.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(getApplicationContext(), "Email cambiado exitosamente", Toast.LENGTH_SHORT).show();
+                                            cdcontra.setVisibility(View.GONE);
+                                            cdcorreo.setVisibility(View.GONE);
+                                            cdborrar.setVisibility(View.GONE);
+                                            constraintEdit.setVisibility(View.VISIBLE);
+                                        }
+                                    });
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "Parece que la contraseña ingresada es incorrecta, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else{
-                                Toast.makeText(getApplicationContext(), "Parece que la contraseña ingresada es incorrecta, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
                             }
                         }
-                        else{
-                            Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
+                    });
+                    closeKeyboard();
+                }
+                else
+                {
+                    Intent intent = new Intent(Configuracion.this, Internet.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -231,20 +252,31 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         conBor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("Users").document(user).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent1);
-                        Toast.makeText(getApplicationContext(), "Cuenta borrada exitosamente!", Toast.LENGTH_SHORT).show();
+                boolean con = conexion();
+                if(con)
+                {
+                    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Users").document(user).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent1);
+                            Toast.makeText(getApplicationContext(), "Cuenta borrada exitosamente!", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    cdcontra.setVisibility(View.GONE);
+                    cdcorreo.setVisibility(View.GONE);
+                    cdborrar.setVisibility(View.GONE);
+                    constraintEdit.setVisibility(View.VISIBLE);
+                    closeKeyboard();
+                }
+                else
+                {
+                    Intent intent = new Intent(Configuracion.this, Internet.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
@@ -299,5 +331,33 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
             startActivity(intent);
         }
         return true;
+    }
+
+
+    private void closeKeyboard()
+    {
+        View view = this.getCurrentFocus();
+        if(view != null)
+        {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
+    public boolean conexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getBaseContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null && networkInfo.isConnected())
+        {
+            return true;
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No está conectado a internet", Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
     }
 }

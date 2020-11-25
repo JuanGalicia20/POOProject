@@ -43,14 +43,14 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class MenuP extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private String user;
+    private String user,name;
     private ImageButton btnHorarios;
     private ImageButton btnTareas;
     private ImageButton btnConsejos;
     private ImageButton btnPlanificacion;
     private NavigationView navigationView;
     private ImageView abrirMenu;
-    private TextView nombreConfig;
+    private TextView nombreConfig, correoConfig;
 
 
     @Override
@@ -152,6 +152,8 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
         if (navigationView != null) {
             navigationView.setNavigationItemSelectedListener(this);
         }
+
+        cambiarDatos();
     }
 
     public void openMenuPrincipal(int opcion, String user)
@@ -186,8 +188,7 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(intent);
         }
 
-        nombreConfig = (TextView)findViewById(R.id.nombreUser);
-        nombreConfig.setText(user);
+
     }
 
     public boolean conexion()
@@ -215,6 +216,7 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
         if (id == R.id.navConfig) {
             Intent intent = new Intent(this, Configuracion.class);
             intent.putExtra("User", user);
+            intent.putExtra("Nombre", name);
             startActivity(intent);
         }
         else if(id == R.id.navHome)
@@ -230,10 +232,14 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String email = (String)documentSnapshot.get("email");
-                String name = (String)documentSnapshot.get("name");
+                name = (String)documentSnapshot.get("name");
 
 
                 //Settear textviews a variables email y name.
+                nombreConfig = (TextView)findViewById(R.id.nombreUser);
+                nombreConfig.setText(name);
+                correoConfig = (TextView)findViewById(R.id.correoUser);
+                correoConfig.setText(email);
             }
         });
 

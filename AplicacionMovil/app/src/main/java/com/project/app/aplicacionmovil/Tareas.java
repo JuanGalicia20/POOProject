@@ -63,6 +63,7 @@ public class Tareas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nuevaTareaCard.setVisibility(View.VISIBLE);
+                btnNuevaTarea.setVisibility(View.GONE);
             }
         });
 
@@ -175,9 +176,18 @@ public class Tareas extends AppCompatActivity {
                     nuevoAdaptador.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String titulo = listaTareas.get(recycler.getChildAdapterPosition(v)).getTitulo();
-                            String desc = listaTareas.get(recycler.getChildAdapterPosition(v)).getDescripcion();
-                            openDialog(desc);
+                            boolean con = conexion();
+                            if(con)
+                            {
+                                String titulo = listaTareas.get(recycler.getChildAdapterPosition(v)).getTitulo();
+                                String desc = listaTareas.get(recycler.getChildAdapterPosition(v)).getDescripcion();
+                                openDialog(desc);
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(Tareas.this, Internet.class);
+                                startActivity(intent);
+                            }
                         }
                     });
                     recycler.setAdapter(nuevoAdaptador);
