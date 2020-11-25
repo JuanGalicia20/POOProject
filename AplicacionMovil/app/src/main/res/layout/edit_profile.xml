@@ -9,112 +9,14 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/changeUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="10dp"
-        app:cardCornerRadius="15dp"
-        android:visibility="gone">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="393dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageCloseU"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="25dp"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:maxHeight="40dp"
-                android:rotation="-90"
-                android:scaleType="fitCenter"
-                android:src="@drawable/flechaapuntaaladerecha" />
-
-            <TextView
-                android:id="@+id/textViewUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/amaranth"
-                android:text="Cambiar tu nombre de usuario"
-                android:textSize="30dp" />
-
-
-            <EditText
-                android:id="@+id/txtViewCUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="25dp"
-                android:ems="10"
-                android:hint="Nuevo nombre de usuario"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/txtViewConfirmarPU"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginRight="25dp"
-                android:ems="10"
-                android:hint="Confirmar contraseña"
-                android:inputType="textPersonName" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnCancelU"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:background="#20B2AA"
-                    android:fontFamily="@font/amaranth"
-                    android:text="Cancelar"
-                    android:layout_marginLeft="25dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="25dp" />
-
-                <Button
-                    android:id="@+id/btnChangeU"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="25dp"
-                    android:background="#20B2AA"
-                    android:fontFamily="@font/amaranth"
-                    android:text="Cambiar"
-                    android:textColor="@android:color/white"
-                    android:textSize="25dp" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
         android:id="@+id/changePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
-        app:cardCornerRadius="15dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:cardCornerRadius="15dp">
 
 
         <LinearLayout
@@ -222,8 +124,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
-        app:cardCornerRadius="15dp"
-        android:visibility="gone">
+        android:visibility="visible"
+        app:cardCornerRadius="15dp">
 
 
         <LinearLayout
@@ -321,8 +223,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="90dp"
         android:layout_marginRight="10dp"
-        app:cardCornerRadius="15dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:cardCornerRadius="15dp">
 
 
         <LinearLayout
@@ -479,30 +381,13 @@
             app:layout_constraintTop_toBottomOf="@+id/appBarLayoutConfig" />
 
         <Button
-            android:id="@+id/btnCUser"
-            android:layout_width="289dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="132dp"
-            android:background="#20B2AA"
-            android:fontFamily="@font/amaranth"
-            android:text="Cambiar usuario"
-            android:textColor="@android:color/white"
-            android:textSize="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nombreConfig" />
-
-        <Button
             android:id="@+id/btnCPassword"
             android:layout_width="289dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="152dp"
             android:background="#1B9891"
             android:fontFamily="@font/amaranth"
             android:text="Cambiar contraseña"
@@ -510,7 +395,7 @@
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCUser" />
+            app:layout_constraintTop_toBottomOf="@+id/nombreConfig" />
 
         <Button
             android:id="@+id/btnCEmail"

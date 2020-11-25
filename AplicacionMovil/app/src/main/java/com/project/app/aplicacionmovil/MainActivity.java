@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity{
                 {
                     final String[] userProv = new String[2];
                     final String[] passProv = new String[1];
+                    final String[] email = new String[1];
 
                     final String usuario = txtUsuario.getText().toString();
                     final String contrasena = txtContra.getText().toString();
@@ -159,6 +160,7 @@ public class MainActivity extends AppCompatActivity{
                                     userProv[0] = (String) documentSnapshot.get("user");
                                     userProv[1] = (String) documentSnapshot.get("name");
                                     passProv[0] = (String) documentSnapshot.get("password");
+                                    email[0] = (String)documentSnapshot.get("email");
 
 
                                     if(usuario.equals(userProv[0]) && contrasena.equals(passProv[0])){

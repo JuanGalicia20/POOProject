@@ -31,9 +31,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -219,5 +222,20 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
             Toast.makeText(getApplicationContext(), "Ya te encuentras en el inicio", Toast.LENGTH_SHORT).show();
         }
         return true;
+    }
+
+    public void cambiarDatos(){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String email = (String)documentSnapshot.get("email");
+                String name = (String)documentSnapshot.get("name");
+
+
+                //Settear textviews a variables email y name.
+            }
+        });
+
     }
 }

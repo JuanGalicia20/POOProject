@@ -16,7 +16,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class Configuracion extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -26,18 +31,25 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
     private ImageView cusuario, ccontra, ccorreo, cborrar;
     private Button btnusuario, btncontra,btncorreo, btnborrar;
     private Button canU, conU, canCon, conCon, canCor, conCor, canBor, conBor;
-    private CardView cdusuario, cdcontra, cdcorreo, cdborrar;
+    private CardView  cdcontra, cdcorreo, cdborrar;
     private ConstraintLayout constraintEdit;
-    private TextView nom;
+    private TextView nom, txtNewContra, txtConfirmNewPass, txtViejaContra, txtEmail, txtConfContra;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_config);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         this.user = intent.getStringExtra("User");
         nom=findViewById(R.id.nombreConfig);
         nom.setText(user);
+
+        txtNewContra = (TextView)findViewById(R.id.txtViewCPassword);
+        txtConfirmNewPass = (TextView)findViewById(R.id.txtViewCNPassword);
+        txtViejaContra = (TextView)findViewById(R.id.txtViewConfirmarPP);
+        txtEmail = (TextView)findViewById(R.id.txtViewCEmail);
+        txtConfContra = (TextView)findViewById(R.id.txtViewConfirmarPE);
+
 
         navigationView = (NavigationView)findViewById(R.id.nav_config);
         navigationView.setItemIconTintList(null);
@@ -58,8 +70,6 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
 
         constraintEdit=(ConstraintLayout)findViewById(R.id.constraintEdit);
         constraintEdit.setVisibility(View.VISIBLE);
-        cdusuario = (CardView)findViewById(R.id.changeUser);
-        cdusuario.setVisibility(View.GONE);
         cdcontra = (CardView)findViewById(R.id.changePassword);
         cdcontra.setVisibility(View.GONE);
         cdcorreo = (CardView)findViewById(R.id.changeEmail);
@@ -67,23 +77,12 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         cdborrar = (CardView)findViewById(R.id.DeleteAccount);
         cdborrar.setVisibility(View.GONE);
 
-        cusuario = findViewById(R.id.imageCloseU);
-        cusuario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.VISIBLE);
-            }
-        });
 
         ccontra=findViewById(R.id.imageCloseP);
         ccontra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
+
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -95,7 +94,7 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         ccorreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
+
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -107,7 +106,7 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         cborrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
+
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -115,36 +114,11 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
             }
         });
 
-
-        canU = findViewById(R.id.btnCancelU);
-        canU.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.VISIBLE);
-            }
-        });
-
-        conU = findViewById(R.id.btnChangeU);
-        conU.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.VISIBLE);
-            }
-        });
 
         canCon= findViewById(R.id.btnCancelP);
         canCon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -156,11 +130,42 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         conCon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.VISIBLE);
+                final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                if(txtNewContra.getText().toString().equals(txtConfirmNewPass.getText().toString())){
+                    db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists() == true){
+                                String contra = (String) documentSnapshot.get("password");
+                                if(contra.equals(txtViejaContra.getText().toString())){
+                                    db.collection("Users").document(user).update("password", txtNewContra.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(getApplicationContext(), "Contraseña cambiada exitosamente", Toast.LENGTH_SHORT).show();
+                                            cdcontra.setVisibility(View.GONE);
+                                            cdcorreo.setVisibility(View.GONE);
+                                            cdborrar.setVisibility(View.GONE);
+                                            constraintEdit.setVisibility(View.VISIBLE);
+                                        }
+                                    });
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "Parece que la contraseña anterior no coincide con la ingresada, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Parece que las contraseñas ingresadas no coinciden, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                }
+
+
+
             }
         });
 
@@ -168,7 +173,7 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         canCor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
+
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -180,11 +185,34 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         conCor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.VISIBLE);
+                final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("Users").document(user).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists() == true){
+                            String contra = (String) documentSnapshot.get("password");
+                            if(contra.equals(txtConfContra.getText().toString())){
+                                db.collection("Users").document(user).update("email", txtEmail.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getApplicationContext(), "Email cambiado exitosamente", Toast.LENGTH_SHORT).show();
+                                        cdcontra.setVisibility(View.GONE);
+                                        cdcorreo.setVisibility(View.GONE);
+                                        cdborrar.setVisibility(View.GONE);
+                                        constraintEdit.setVisibility(View.VISIBLE);
+                                    }
+                                });
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Parece que la contraseña ingresada es incorrecta, intenta de nuevo!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
             }
         });
 
@@ -192,7 +220,6 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         canBor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -204,7 +231,16 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         conBor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
+                final FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("Users").document(user).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent1);
+                        Toast.makeText(getApplicationContext(), "Cuenta borrada exitosamente!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -212,24 +248,10 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
             }
         });
 
-
-        btnusuario = (Button)findViewById(R.id.btnCUser);
-        btnusuario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cdusuario.setVisibility(View.VISIBLE);
-                cdcontra.setVisibility(View.GONE);
-                cdcorreo.setVisibility(View.GONE);
-                cdborrar.setVisibility(View.GONE);
-                constraintEdit.setVisibility(View.GONE);
-            }
-        });
-
         btncontra=(Button)findViewById(R.id.btnCPassword);
         btncontra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
                 cdcontra.setVisibility(View.VISIBLE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.GONE);
@@ -241,7 +263,6 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         btncorreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.VISIBLE);
                 cdborrar.setVisibility(View.GONE);
@@ -253,7 +274,6 @@ public class Configuracion extends AppCompatActivity implements NavigationView.O
         btnborrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cdusuario.setVisibility(View.GONE);
                 cdcontra.setVisibility(View.GONE);
                 cdcorreo.setVisibility(View.GONE);
                 cdborrar.setVisibility(View.VISIBLE);
