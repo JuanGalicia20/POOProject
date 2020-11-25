@@ -27,8 +27,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.project.app.aplicacionmovil.R;
 
 import java.io.IOException;
@@ -45,7 +48,6 @@ public class MainActivity extends AppCompatActivity{
     private Button buttonRegistrarse;
     private EditText txtUsuario;
     private EditText txtContra;
-    private Bitmap profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,19 @@ public class MainActivity extends AppCompatActivity{
 
         //setup
 
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if(task.isSuccessful()){
+                    String token = task.getResult();
 
+                    // Log and toast
+
+                    Log.d(TAG, token);
+                    System.out.println("hOLA: " + token);
+                }
+            }
+        });
         buttonRegistrarse = (Button) findViewById(R.id.registrarse);
         buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,32 +143,43 @@ public class MainActivity extends AppCompatActivity{
                 {
                     final String[] userProv = new String[2];
                     final String[] passProv = new String[1];
+                    final String[] email = new String[1];
 
                     final String usuario = txtUsuario.getText().toString();
                     final String contrasena = txtContra.getText().toString();
 
 
+                    if(usuario.isEmpty() == true){
+                        Toast.makeText(getApplicationContext(), "Debes ingresar un usuario. Intenta de nuevo!", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        db.collection("Users").document(usuario).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if(documentSnapshot.exists() == true){
+                                    userProv[0] = (String) documentSnapshot.get("user");
+                                    userProv[1] = (String) documentSnapshot.get("name");
+                                    passProv[0] = (String) documentSnapshot.get("password");
+                                    email[0] = (String)documentSnapshot.get("email");
 
-                    db.collection("Users").document(usuario).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if(documentSnapshot.exists() == true){
-                                userProv[0] = (String) documentSnapshot.get("user");
-                                userProv[1] = (String) documentSnapshot.get("name");
-                                passProv[0] = (String) documentSnapshot.get("password");
+
+                                    if(usuario.equals(userProv[0]) && contrasena.equals(passProv[0])){
+                                        Toast.makeText(getApplicationContext(), "Bienvenido " +userProv[1], Toast.LENGTH_SHORT).show();
+                                        openActividad(1);
+                                    }
+                                    else if(usuario.equals(userProv[0]) && !contrasena.equals(passProv[0])){
+                                        Toast.makeText(getApplicationContext(), "Parece que has ingresado una contraseña incorrecta. Intenta de nuevo!", Toast.LENGTH_LONG).show();
+                                    }
 
 
-                                if(usuario.equals(userProv[0]) && contrasena.equals(passProv[0])){
-                                    openActividad(1);
                                 }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "El usuario ingresado no existe, intenta de nuevo!", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    }
 
-                                Toast.makeText(getApplicationContext(), "Bienvenido " +userProv[1], Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), "No existe", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
 
 
                     /**if(!usuario.equals("") && !contrasena.equals("")) {

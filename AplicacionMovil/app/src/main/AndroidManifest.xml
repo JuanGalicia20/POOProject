@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.project.app.aplicacionmovil">
+    package="com.project.app.aplicacionmovil" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,11 +11,20 @@
         android:label="Hollege"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Internet"></activity>
+
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_asset_16" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@layout/edit_profile" />
+        <activity android:name=".Internet" />
         <activity android:name=".Planificacion" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Tareas"/>
+        <activity android:name=".Configuracion"/>
+        <activity android:name=".Tareas" />
         <activity
             android:name=".HorarioSeleccionado"
             android:label="Horario"
@@ -28,7 +37,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MenuP" />
         <activity android:name=".Registrarse" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,6 +48,15 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

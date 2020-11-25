@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +50,8 @@ public class Horarios extends AppCompatActivity {
     private int intRadioID = 2131362098;
     private int contador=-1;
     private Button bt;
+    private RelativeLayout relativeLayout;
+    private LinearLayout rootlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +65,22 @@ public class Horarios extends AppCompatActivity {
          * Cambiar para objeto tipo user
          */
 
-
+        relativeLayout  = (RelativeLayout)findViewById(R.id.relativeHorario);
+        rootlayout = (LinearLayout)findViewById(R.id.rootlayout);
 
         nombreHorario = (EditText)findViewById(R.id.txtViewNHorario);
         opcion = (RadioGroup) findViewById(R.id.radioGroup);
         formulario = (CardView) findViewById(R.id.nuevohorario);
         formulario.setVisibility(View.GONE);
+        relativeLayout.setVisibility(View.VISIBLE);
+        rootlayout.setVisibility(View.VISIBLE);
         anadir = (CardView) findViewById(R.id.anadir);
         this.anadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 formulario.setVisibility(View.VISIBLE);
+                relativeLayout.setVisibility(View.GONE);
+                rootlayout.setVisibility(View.GONE);
             }
         });
 
@@ -82,6 +90,8 @@ public class Horarios extends AppCompatActivity {
             public void onClick(View view) {
                 closeKeyboard();
                 formulario.setVisibility(View.GONE);
+                relativeLayout.setVisibility(View.VISIBLE);
+                rootlayout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -96,6 +106,8 @@ public class Horarios extends AppCompatActivity {
                     closeKeyboard();
                     addHorario();
                     formulario.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
+                    rootlayout.setVisibility(View.VISIBLE);
                     nombreHorario.setText("");
                 }
                 else

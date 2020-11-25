@@ -58,6 +58,8 @@ public class Dialog  extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog,null);
+        timeIn = "12:00 AM";
+        timeOut = "12:00 AM";
 
         builder.setView(view).setTitle("Nueva Evento")
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

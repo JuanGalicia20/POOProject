@@ -80,6 +80,7 @@ public class HorarioSeleccionado extends AppCompatActivity {
     private Button iniciar;
     private Button fin;
     private int t1H,t1M,t2H,t2M;
+    private LinearLayout contenidoDias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +95,16 @@ public class HorarioSeleccionado extends AppCompatActivity {
         toolBarLayout.setTitle(getTitle());
 
         cargarActividades();
-
+        contenidoDias = (LinearLayout)findViewById(R.id.contenidoDias);
         final CardView newAct = (CardView) findViewById(R.id.newactivity);
         newAct.setVisibility(View.GONE);
+        contenidoDias.setVisibility(View.VISIBLE);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 newAct.setVisibility(View.VISIBLE);
+                contenidoDias.setVisibility(View.GONE);
             }
         });
 
@@ -111,6 +114,7 @@ public class HorarioSeleccionado extends AppCompatActivity {
             public void onClick(View view) {
                 closeKeyboard();
                 newAct.setVisibility(View.GONE);
+                contenidoDias.setVisibility(View.VISIBLE);
             }
         });
         final Spinner daySpinner = (Spinner) findViewById(R.id.daySpinner);
@@ -158,13 +162,7 @@ public class HorarioSeleccionado extends AppCompatActivity {
         txtNombre=(TextView)findViewById(R.id.nombreH);
         txtNombre.setText(nombreH);
         setTitle(nombreH);
-        lunes = (ImageView)findViewById(R.id.imglunes);
-        martes = (ImageView)findViewById(R.id.imgmartes);
-        miercoles = (ImageView)findViewById(R.id.imgmiercoles);
-        jueves = (ImageView)findViewById(R.id.imgjueves);
-        viernes = (ImageView)findViewById(R.id.imgviernes);
-        sabado = (ImageView)findViewById(R.id.imgsabado);
-        domingo = (ImageView)findViewById(R.id.imgdomingo);
+
 
         lunesLl = (LinearLayout)findViewById(R.id.nuevosLunes);
         martesLl = (LinearLayout)findViewById(R.id.nuevosMartes);
@@ -173,55 +171,6 @@ public class HorarioSeleccionado extends AppCompatActivity {
         viernesLl=(LinearLayout)findViewById(R.id.nuevosViernes);
         sabadoLl=(LinearLayout)findViewById(R.id.nuevosSabado);
         domingoLl=(LinearLayout)findViewById(R.id.nuevosDomingo);
-
-        lunes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        martes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        miercoles.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        jueves.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        viernes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        sabado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        domingo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
 
@@ -311,6 +260,7 @@ public class HorarioSeleccionado extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Actividad creada correctamente ",Toast.LENGTH_SHORT).show();
                     closeKeyboard();
                     newAct.setVisibility(View.GONE);
+                    contenidoDias.setVisibility(View.VISIBLE);
                 }
                 catch (Exception e){
                     Toast.makeText(getApplicationContext(),"Parece que hubo un error, revise los campos e intente nuevamente. ",Toast.LENGTH_SHORT).show();

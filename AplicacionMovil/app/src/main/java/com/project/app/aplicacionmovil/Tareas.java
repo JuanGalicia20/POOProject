@@ -63,6 +63,7 @@ public class Tareas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nuevaTareaCard.setVisibility(View.VISIBLE);
+                btnNuevaTarea.setVisibility(View.GONE);
             }
         });
 
@@ -76,11 +77,31 @@ public class Tareas extends AppCompatActivity {
         iBtnTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTarea();
-
+                boolean con = conexion();
+                if(con)
+                {
+                    closeKeyboard();
+                    addTarea();
+                    nuevaTareaCard.setVisibility(View.GONE);
+                }
+                else
+                {
+                    Intent intent = new Intent(Tareas.this, Internet.class);
+                    startActivity(intent);
+                }
             }
         });
-        nuevasTareas();
+        boolean con2 = conexion();
+        if(con2)
+        {
+            nuevasTareas();
+        }
+        else
+        {
+            Intent intent2 = new Intent(Tareas.this, Internet.class);
+            startActivity(intent);
+        }
+
 
     }
 
@@ -152,6 +173,23 @@ public class Tareas extends AppCompatActivity {
                     }
 
                     nuevoAdaptador = new AdaptadorTareas(listaTareas);
+                    nuevoAdaptador.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            boolean con = conexion();
+                            if(con)
+                            {
+                                String titulo = listaTareas.get(recycler.getChildAdapterPosition(v)).getTitulo();
+                                String desc = listaTareas.get(recycler.getChildAdapterPosition(v)).getDescripcion();
+                                openDialog(desc);
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(Tareas.this, Internet.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
                     recycler.setAdapter(nuevoAdaptador);
 
 
@@ -167,17 +205,12 @@ public class Tareas extends AppCompatActivity {
 
         });
 
-        /*listaTareas.add(new ObjetoTareas("Ejercicio", "3 EJERCICIOS DE CALCULO"));
-                        listaTareas.add(new ObjetoTareas("Almuerzos", "COMIDAAS"));
-                        listaTareas.add(new ObjetoTareas("Tb4tf", "3 bt4efbte"));
-                        listaTareas.add(new ObjetoTareas("reomp", "ve0ijmbi0´qepbnvm0i´3pqr"));
-                        listaTareas.add(new ObjetoTareas("Ej", "3 ECALCULO"));*/
-
-
-
-
     }
 
-
+    public void openDialog(String descripcion)
+    {
+        DialogTareas dialog = new DialogTareas(descripcion);
+        dialog.show(getSupportFragmentManager(),"Example Dialog");
+    }
 
 }

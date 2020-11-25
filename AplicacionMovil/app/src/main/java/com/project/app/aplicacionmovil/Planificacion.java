@@ -75,11 +75,6 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
         setContentView(R.layout.activity_planificacion);
         tituloPlanificacion=(TextView)findViewById(R.id.tituloPlanificacion);
 
-
-
-
-
-
         tituloCalendario=(TextView)findViewById(R.id.tituloCalendario);
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -87,11 +82,7 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
         String currentTime = meses[month]+" / "+year;
         tituloCalendario.setText(currentTime.toString());
 
-
         llenarPlanificacion();
-
-
-
 
         nuevoEvento = (FloatingActionButton)findViewById(R.id.floatingNewEvent);
         nuevoEvento.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +115,7 @@ public class Planificacion extends AppCompatActivity implements Dialog.DialogLis
         dialogEvent.show(getSupportFragmentManager(),"Example");
     }
 
-    
+
     public void llenarPlanificacion(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Users").document(user).collection("Planificaciones").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
