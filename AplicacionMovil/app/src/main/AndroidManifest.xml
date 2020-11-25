@@ -13,7 +13,10 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme" >
-        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_asset_16" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@layout/edit_profile" />
@@ -49,9 +52,6 @@
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
-            <meta-data
-                android:name="com.google.firebase.messaging.default_notification_icon"
-                android:resource="@drawable/logo1" />
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
