@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,12 +47,13 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
     private ImageButton btnPlanificacion;
     private NavigationView navigationView;
     private ImageView abrirMenu;
+    private TextView nombreConfig;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_menup);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.nav_menup);
 
 
         /**
@@ -59,6 +61,9 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
          */
         Intent intent = getIntent();
         this.user = intent.getStringExtra("User");
+        nombreConfig = (TextView)findViewById(R.id.nombreUser);
+        //nombreConfig.setText(user);
+
 
         btnHorarios = (ImageButton)findViewById(R.id.btnhorarios);
         btnHorarios.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +79,6 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
                     Intent intent = new Intent(MenuP.this, Internet.class);
                     startActivity(intent);
                 }
-
-
             }
         });
 
@@ -111,7 +114,6 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
                     Intent intent = new Intent(MenuP.this, Internet.class);
                     startActivity(intent);
                 }
-
             }
         });
 
@@ -129,7 +131,6 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
                     Intent intent = new Intent(MenuP.this, Internet.class);
                     startActivity(intent);
                 }
-
             }
         });
 
@@ -209,7 +210,8 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
         int id = item.getItemId();
 
         if (id == R.id.navConfig) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Configuracion.class);
+            intent.putExtra("User", user);
             startActivity(intent);
         }
         else if(id == R.id.navHome)

@@ -16,12 +16,11 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.actions"
-            android:resource="@xml/EditProfile" />
-
-
+            android:resource="@layout/edit_profile" />
         <activity android:name=".Internet" />
         <activity android:name=".Planificacion" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".Configuracion"/>
         <activity android:name=".Tareas" />
         <activity
             android:name=".HorarioSeleccionado"

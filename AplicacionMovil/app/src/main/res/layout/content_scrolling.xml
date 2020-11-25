@@ -14,6 +14,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/LLNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/newactivity"
             android:layout_width="match_parent"
@@ -43,7 +49,8 @@
                     android:layout_marginTop="20dp"
                     android:scaleType="fitCenter"
                     android:clickable="true"
-                    app:srcCompat="@drawable/flechaapuntaaladerecha" />
+                    app:srcCompat="@drawable/flechaapuntaaladerecha"
+                    android:focusable="true" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -110,7 +117,7 @@
                         android:id="@+id/txtinicio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="00:00"
+                        android:text="12:00 AM"
                         android:textSize="24dp"
                         android:layout_marginLeft="50dp"></TextView>
 
@@ -118,7 +125,7 @@
                         android:id="@+id/txtfin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="00:00"
+                        android:text="12:00 AM"
                         android:textSize="24dp"
                         android:layout_marginLeft="80dp"></TextView>
                 </LinearLayout>
@@ -155,8 +162,15 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
+    <LinearLayout
+        android:id="@+id/contenidoDias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
         <LinearLayout
             android:id="@+id/linearLunes"
             android:layout_width="match_parent"
@@ -496,7 +510,8 @@
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                android:focusable="true">
 
                 <LinearLayout
                     android:id="@+id/nuevosSabado"
@@ -528,7 +543,8 @@
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
+                app:cardElevation="8dp"
+                android:focusable="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -570,5 +586,6 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

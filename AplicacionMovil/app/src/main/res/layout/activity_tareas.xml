@@ -117,7 +117,9 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:layout_gravity="right"
-            app:srcCompat="@drawable/mas" />
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/mas" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerTareas"
