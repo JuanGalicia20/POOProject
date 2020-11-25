@@ -190,17 +190,6 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imglunes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -259,17 +248,6 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imgmartes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -329,17 +307,6 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imgmiercoles"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -399,17 +366,6 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imgjueves"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -469,17 +425,6 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imgviernes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -540,18 +485,7 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imgsabado"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
-                </LinearLayout>
+                    </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -611,18 +545,7 @@
                         android:textAlignment="center"
                         android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/imgdomingo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:maxWidth="20dp"
-                        android:maxHeight="42dp"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
-                </LinearLayout>
+                    </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView

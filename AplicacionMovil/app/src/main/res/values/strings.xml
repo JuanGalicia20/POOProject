@@ -122,4 +122,17 @@
     <string name="textview">TextView</string>
     <string name="title_activity_horario_seleccionado">ScrollingActivity</string>
     <string name="todo2">TODO</string>
+    <string name="title_activity_prueba_navigation">PruebaNavigation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_configuracion">Configuracion</string>
+    <string name="title_activity_menu_lateral">MenuLateralActivity</string>
+    <string name="title_activity_nav_drawer">navDrawer</string>
 </resources>

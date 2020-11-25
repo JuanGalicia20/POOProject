@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity{
     private Button buttonRegistrarse;
     private EditText txtUsuario;
     private EditText txtContra;
-    private Bitmap profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
