@@ -61,8 +61,6 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
          */
         Intent intent = getIntent();
         this.user = intent.getStringExtra("User");
-        nombreConfig = (TextView)findViewById(R.id.nombreUser);
-        //nombreConfig.setText(user);
 
 
         btnHorarios = (ImageButton)findViewById(R.id.btnhorarios);
@@ -185,6 +183,8 @@ public class MenuP extends AppCompatActivity implements NavigationView.OnNavigat
             startActivity(intent);
         }
 
+        nombreConfig = (TextView)findViewById(R.id.nombreUser);
+        nombreConfig.setText(user);
     }
 
     public boolean conexion()

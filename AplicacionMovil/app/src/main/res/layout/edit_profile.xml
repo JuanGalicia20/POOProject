@@ -37,7 +37,7 @@
                 android:maxHeight="40dp"
                 android:rotation="-90"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/flechaapuntaaladerecha" />
+                android:src="@drawable/flechaapuntaaladerecha" />
 
             <TextView
                 android:id="@+id/textViewUser"
@@ -135,7 +135,7 @@
                 android:maxHeight="40dp"
                 android:rotation="-90"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/flechaapuntaaladerecha" />
+                android:src="@drawable/flechaapuntaaladerecha" />
 
             <TextView
                 android:id="@+id/textViewPassword"
@@ -144,7 +144,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/amaranth"
-                android:text="Cambiar tu nombre de usuario"
+                android:text="Cambiar tu contraseña de usuario"
                 android:textSize="30dp" />
 
 
@@ -244,7 +244,7 @@
                 android:maxHeight="40dp"
                 android:rotation="-90"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/flechaapuntaaladerecha" />
+                android:src="@drawable/flechaapuntaaladerecha" />
 
             <TextView
                 android:id="@+id/textViewUserCEmail"
@@ -343,7 +343,7 @@
                 android:maxHeight="40dp"
                 android:rotation="-90"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/flechaapuntaaladerecha" />
+                android:src="@drawable/flechaapuntaaladerecha" />
 
 
             <TextView
@@ -407,6 +407,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintEdit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
